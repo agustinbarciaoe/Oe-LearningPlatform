@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners(CustomTestListener.class)
@@ -25,6 +26,16 @@ public class AssertRequeridos extends BaseMethods {
     public void tearDown() throws Exception {
       //  driver.close();
       //  driver.quit();
+    }
+
+    @Test
+    public void leadformtitle(){
+
+        setCaseID(44791);
+        setCaseComment("Verificando que el titulo del leadform sea correcto");
+        driver.get("https://www.stg.openenglish.com/");
+        assertEquals(driver.findElement(By.id("leadform-title")).getText(), "Empieza a Aprender Inglés");
+
     }
 
     @Test

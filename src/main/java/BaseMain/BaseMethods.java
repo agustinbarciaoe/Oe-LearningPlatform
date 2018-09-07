@@ -37,7 +37,9 @@ public class BaseMethods {
     public static void setCaseID(int value){
         caseID = value;
         }
-    public static void setCaseComment(String comentario){ caseComment = comentario;}
+    public static void setCaseComment(String comentario){
+        caseComment = comentario;
+        }
 
 
     // Random email

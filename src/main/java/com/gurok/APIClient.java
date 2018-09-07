@@ -108,7 +108,7 @@ public class APIClient
 	{
 		return this.sendRequest("POST", uri, data);
 	}
-	
+
 	private Object sendRequest(String method, String uri, Object data)
 		throws MalformedURLException, IOException, APIException
 	{
