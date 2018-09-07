@@ -57,6 +57,13 @@ public class BaseMethods {
     }
 
 
+    //get cookie value
+
+    public static String getValueOfCookieNamed(String name){
+
+        return driver.manage().getCookieNamed(name).getValue();}
+
+
     //post a test rail para un test ok
 
     public void testPassed() throws IOException, APIException {
@@ -80,9 +87,9 @@ public class BaseMethods {
         client.setUser("agustin.barcia@openenglish.com");
         client.setPassword("0232049021Ajb!");
         Map data = new HashMap();
-        data.put("status_id", new Integer(1));
+        data.put("status_id", new Integer(5));
         data.put("custom_environment", new Integer(1));
-        data.put("comment", "TestingAutomation-intellij");
+        data.put("comment", caseComment);
         JSONObject r = (JSONObject) client.sendPost("add_result/"+caseID, data);
 
     }
