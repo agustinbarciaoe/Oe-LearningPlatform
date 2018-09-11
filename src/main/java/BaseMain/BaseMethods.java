@@ -20,7 +20,8 @@ public class BaseMethods {
     public static WebDriver driver;
     public static Select dropdown;
     public static int caseID;
-
+    public static String ckName = new String();
+    public static String ckValue = new String();
     public static String caseComment = new String();
 
     //Inicializacion del web driver
@@ -32,7 +33,7 @@ public class BaseMethods {
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
-    //setter para el case id
+    //setter
 
     public static void setCaseID(int value){
         caseID = value;
@@ -40,6 +41,8 @@ public class BaseMethods {
     public static void setCaseComment(String comentario){
         caseComment = comentario;
         }
+    public static void setLangCookieName(String name){ckName = name;}
+    public static void setLangCookieValue(String value){ckValue = value;}
 
 
     // Random email
@@ -59,9 +62,7 @@ public class BaseMethods {
 
     //get cookie value
 
-    public static String getValueOfCookieNamed(String name){
 
-        return driver.manage().getCookieNamed(name).getValue();}
 
 
     //post a test rail para un test ok

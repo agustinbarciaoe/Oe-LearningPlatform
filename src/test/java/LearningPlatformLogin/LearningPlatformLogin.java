@@ -3,6 +3,8 @@ package LearningPlatformLogin;
 import BaseMain.BaseMethods;
 import BaseTest.CustomTestListener;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -11,6 +13,7 @@ import org.testng.annotations.Test;
 
 @Listeners(CustomTestListener.class)
 public class LearningPlatformLogin extends BaseMethods {
+
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -26,21 +29,54 @@ public class LearningPlatformLogin extends BaseMethods {
     }
 
     @Test
-    public void assertLoginForm(){
+    public void assertEnLoginForm(){
 
         setCaseID(44791);
         setCaseComment("Testing cookie values");
+        setLangCookieName("NLS");
+        setLangCookieValue("en");
+        Cookie ck = new Cookie(ckName, ckValue);
         driver.get("https://learningplatform.stg.openenglish.com/login.html");
-        String Lang = driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Writing Tool'])[1]/following::h1[1]")).getText();
-        System.out.println(Lang);
-        String LangCompare = "Welcome";
-        if(Lang.equals(LangCompare)){
+        driver.manage().addCookie(ck);
+        driver.get("https://learningplatform.stg.openenglish.com/login.html");
 
-            System.out.println("si funciono perro");
+            Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"login-holder\"]/lp2-login-page/lp2-login-box/div/div/h1")).getText(), "Welcome");
+            Assert.assertTrue(driver.findElement(By.id("login-email")).getAttribute("placeholder").contains("Email"));
+            Assert.assertTrue(driver.findElement(By.id("login-password")).getAttribute("placeholder").contains("Password"));
+            Assert.assertTrue(driver.findElement(By.id("login-submit")).getText().matches("Log In"));
+            Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"login-holder\"]/lp2-login-page/lp2-login-box/div/div/div/form/div[3]/div/label")).getText(), "Remember Me");
+            Assert.assertTrue(driver.findElement(By.linkText("Password Reset")).getText().contains("Password Reset"));
+            Assert.assertEquals(driver.findElement(By.linkText("Password Reset")).getAttribute("href"), "https://learningplatform.stg.openenglish.com/recovery.html");
+            Assert.assertTrue(driver.findElement(By.linkText("Sign Up")).getText().matches("Sign Up"));
+            Assert.assertTrue(driver.findElement(By.linkText("Sign Up")).getAttribute("href").matches("http://www.openenglish.com/en"));
 
-        }else{
-            System.out.println(":( no funciono");
         }
+    @Test
+    public void assertEsLoginForm(){
+
+        setCaseID(44791);
+        setCaseComment("Testing cookie values");
+        setLangCookieName("NLS");
+        setLangCookieValue("es");
+        Cookie ck = new Cookie(ckName, ckValue);
+        driver.get("https://learningplatform.stg.openenglish.com/login.html");
+        driver.manage().addCookie(ck);
+        driver.get("https://learningplatform.stg.openenglish.com/login.html");
+
+            Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"login-holder\"]/lp2-login-page/lp2-login-box/div/div/h1")).getText(), "Bienvenido");
+            Assert.assertTrue(driver.findElement(By.id("login-email")).getAttribute("placeholder").contains("Email"));
+            Assert.assertTrue(driver.findElement(By.id("login-password")).getAttribute("placeholder").contains("Contraseña"));
+            Assert.assertTrue(driver.findElement(By.id("login-submit")).getText().matches("Iniciar sesión"));
+            Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"login-holder\"]/lp2-login-page/lp2-login-box/div/div/div/form/div[3]/div/label")).getText(), "Recordar mis datos");
+            Assert.assertEquals(driver.findElement(By.linkText("Reestablecer contraseña")).getAttribute("href"), "https://learningplatform.stg.openenglish.com/recovery.html");
+            Assert.assertTrue(driver.findElement(By.linkText("Inscríbete")).getText().matches("Inscríbete"));
+            Assert.assertTrue(driver.findElement(By.linkText("Inscríbete")).getAttribute("href").matches("http://www.openenglish.com/es/"));
+
+    }
+
+
+
+
 
 
 
@@ -48,7 +84,7 @@ public class LearningPlatformLogin extends BaseMethods {
 
 
 
-    }
+
 
 
 
