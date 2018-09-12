@@ -3,10 +3,7 @@ package LeadForm;
 import BaseMain.BaseMethods;
 import BaseTest.CustomTestListener;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.assertTrue;
 
@@ -14,14 +11,14 @@ import static org.testng.Assert.assertTrue;
 public class AssertRequeridosTest extends BaseMethods {
 
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp() throws Exception {
 
         inizialitation();
 
     }
 
-    @AfterMethod
+    @AfterClass
     public void tearDown() throws Exception {
       //  driver.close();
       //  driver.quit();

@@ -4,24 +4,21 @@ import BaseMain.BaseMethods;
 import BaseTest.CustomTestListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 @Listeners(CustomTestListener.class)
 public class HappyPathLeadSubmissionTest extends BaseMethods {
 
 
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp() throws Exception {
 
         inizialitation();
 
     }
 
-    @AfterMethod
+    @AfterClass
     public void tearDown() throws Exception {
         driver.close();
         driver.quit();
