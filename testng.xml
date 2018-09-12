@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="SuiteGeneral"  >
+    <listeners>
+        <listener class-name="org.testng.reporters.EmailableReporter2" />
+    </listeners>
+    <test name="LeadForm test">
+        <classes>
+
+            <class name="LeadForm.HappyPathLeadSubmission">
+
+            </class>
+
+        </classes>
+
+
+    </test>
+</suite>
