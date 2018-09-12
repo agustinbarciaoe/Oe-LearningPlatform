@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 
 @Listeners(CustomTestListener.class)
-public class AssertRequeridos extends BaseMethods {
+public class AssertRequeridosTest extends BaseMethods {
 
 
     @BeforeMethod

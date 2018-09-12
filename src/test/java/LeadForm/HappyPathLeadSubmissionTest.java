@@ -10,7 +10,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners(CustomTestListener.class)
-public class HappyPathLeadSubmission extends BaseMethods {
+public class HappyPathLeadSubmissionTest extends BaseMethods {
 
 
 
