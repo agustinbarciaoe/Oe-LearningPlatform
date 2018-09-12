@@ -3,9 +3,12 @@ package BaseMain;
 import com.gurok.APIClient;
 import com.gurok.APIException;
 import org.json.simple.JSONObject;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,6 +28,7 @@ public class BaseMethods {
 
     //Inicializacion del web driver
 
+    @BeforeClass
     public static void inizialitation(){
 
         String respath = "src/main/resources/chromedriver.exe";
@@ -84,6 +88,12 @@ public class BaseMethods {
         data.put("comment", "TestingAutomation-intellij");
         JSONObject r = (JSONObject) client.sendPost("add_result/"+caseID, data);
 
+    }
+
+    @AfterClass
+    public static void tearDownDriver() {
+        driver.close();
+        driver.quit();
     }
 
 }

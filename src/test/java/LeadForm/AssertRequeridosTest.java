@@ -10,7 +10,7 @@ import static org.testng.Assert.assertTrue;
 @Listeners(CustomTestListener.class)
 public class AssertRequeridosTest extends BaseMethods {
 
-
+/*
     @BeforeClass
     public void setUp() throws Exception {
 
@@ -23,6 +23,7 @@ public class AssertRequeridosTest extends BaseMethods {
       //  driver.close();
       //  driver.quit();
     }
+    */
 
     @Test
     public void requerido(){
@@ -60,8 +61,8 @@ public class AssertRequeridosTest extends BaseMethods {
         setCaseID(44790);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
         driver.get("https://www.stg.openenglish.com/");
-        driver.findElement(By.id("lastname-input"));
-        assertTrue(driver.findElement(By.id("lastname-input")).getAttribute("placeholder").contains("Correo"));
+        //driver.findElement(By.id("emailaddress-input"));
+        assertTrue(driver.findElement(By.id("emailaddress-input")).getAttribute("placeholder").contains("Correo"));
     }
 
     @Test
@@ -72,6 +73,6 @@ public class AssertRequeridosTest extends BaseMethods {
 
         driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("lastname-input"));
-        assertTrue(driver.findElement(By.id("state-select")).getAttribute("placeholder").contains("Correo"));
+        assertTrue(driver.findElement(By.id("state-select")).getAttribute("placeholder").contains("Region"));
     }
 }

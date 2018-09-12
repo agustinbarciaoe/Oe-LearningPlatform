@@ -10,7 +10,7 @@ import org.testng.annotations.*;
 public class HappyPathLeadSubmissionTest extends BaseMethods {
 
 
-
+/*
     @BeforeClass
     public void setUp() throws Exception {
 
@@ -23,7 +23,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         driver.close();
         driver.quit();
     }
-
+*/
 
     @Test
     public void leadSubmission(){
