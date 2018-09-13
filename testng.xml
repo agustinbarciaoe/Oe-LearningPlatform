@@ -7,7 +7,7 @@
     <test name="LeadForm test">
         <classes>
 
-            <class name="LeadForm.HappyPathLeadSubmissionTest">
+            <class name="LeadForm.HappyPathLeadSubmission">
 
             </class>
 

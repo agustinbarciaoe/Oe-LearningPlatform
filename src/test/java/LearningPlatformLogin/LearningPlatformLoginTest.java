@@ -1,32 +1,17 @@
 package LearningPlatformLogin;
 
-import BaseMain.BaseMethods;
+import BaseTest.BaseMain.BaseMethods;
 import BaseTest.CustomTestListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 
 @Listeners(CustomTestListener.class)
-public class LearningPlatformLogin extends BaseMethods {
+public class LearningPlatformLoginTest extends BaseMethods {
 
-
-    @BeforeMethod
-    public void setUp() throws Exception {
-
-        inizialitation();
-
-    }
-
-    @AfterMethod
-    public void tearDown() throws Exception {
-        driver.close();
-        driver.quit();
-    }
 
     @Test
     public void assertEnLoginForm(){

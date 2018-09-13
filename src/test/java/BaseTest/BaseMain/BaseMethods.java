@@ -1,9 +1,8 @@
-package BaseMain;
+package BaseTest.BaseMain;
 
 import com.gurok.APIClient;
 import com.gurok.APIException;
 import org.json.simple.JSONObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
