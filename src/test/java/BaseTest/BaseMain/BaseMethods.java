@@ -31,7 +31,7 @@ public class BaseMethods {
     @BeforeClass
     public static void inizialitation(){
 
-        String respath = "src/main/resources/chromedriver.exe";
+        String respath = "src/main/resources/chromedriver";
         System.setProperty("webdriver.chrome.driver", respath); // "C:\\Users\\Agustin Barcia\\IdeaProjects\\oemaven\\src\\main\\resources\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);

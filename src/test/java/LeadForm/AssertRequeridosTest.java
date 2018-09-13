@@ -50,8 +50,8 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void nombreRequerido(){
 
-        setCaseID(44790);
-        setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
+        setCaseID(44789);
+        setCaseComment("Verificando que el place holder para para el caso exista y sea visible!!!!");
         driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("firstname-input"));
         assertTrue(driver.findElement(By.id("firstname-input")).getAttribute("placeholder").contains("Nombre"));
@@ -69,7 +69,7 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void correoRequerido(){
 
-        setCaseID(44790);
+        setCaseID(44791);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
         driver.get("https://www.stg.openenglish.com/");
         //driver.findElement(By.id("emailaddress-input"));
@@ -79,7 +79,7 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void regionRequerido(){
 
-        setCaseID(44790);
+        setCaseID(44792);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
 
         driver.get("https://www.stg.openenglish.com/");
