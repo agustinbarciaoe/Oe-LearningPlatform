@@ -1,11 +1,13 @@
 package BaseTest.BaseMain;
 
+import com.google.common.collect.ImmutableMap;
 import com.gurok.APIClient;
 import com.gurok.APIException;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
@@ -34,12 +36,20 @@ public class BaseMethods {
     public static void inizialitation(){
 
        // String respath = "/usr/local/bin/chromedriver";
-        //System.setProperty("webdriver.chrome.driver", respath); // "C:\\Users\\Agustin Barcia\\IdeaProjects\\oemaven\\src\\main\\resources\\chromedriver.exe");
+       // System.setProperty("webdriver.chrome.driver", respath); // "C:\\Users\\Agustin Barcia\\IdeaProjects\\oemaven\\src\\main\\resources\\chromedriver.exe");
+
         WebDriverManager.chromedriver().setup();
+
+        ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
+        builder.withVerbose(true);
+        builder.withEnvironment(ImmutableMap.of("DISPLAY", ":1"));
+        ChromeDriverService chromeDriverService = builder.build();
+
+
         ChromeOptions options = new ChromeOptions();
 
         options.addArguments("--headless");
-        options = new ChromeOptions();
+
         options.addArguments("–no-sandbox");
         options.addArguments("–disable-dev-shm-usage");
         options.setExperimentalOption("useAutomationExtension", false);
@@ -49,9 +59,10 @@ public class BaseMethods {
         options.addArguments("--disable-extensions"); // disabling extensions
         options.addArguments("--disable-gpu"); // applicable to windows os only
 
+
         //options.setBinary("/usr/local/bin/chromedriver");
 
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver(chromeDriverService,options);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
