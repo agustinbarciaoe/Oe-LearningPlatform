@@ -43,7 +43,13 @@ public class BaseMethods {
         options.addArguments("–no-sandbox");
         options.addArguments("–disable-dev-shm-usage");
         options.setExperimentalOption("useAutomationExtension", false);
-        options.setBinary("/usr/local/bin/chromedriver");
+
+        options.addArguments("start-maximized"); // open Browser in maximized mode
+        options.addArguments("disable-infobars"); // disabling infobars
+        options.addArguments("--disable-extensions"); // disabling extensions
+        options.addArguments("--disable-gpu"); // applicable to windows os only
+
+        //options.setBinary("/usr/local/bin/chromedriver");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
