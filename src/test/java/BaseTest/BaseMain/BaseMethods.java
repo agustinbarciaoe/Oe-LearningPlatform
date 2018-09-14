@@ -42,7 +42,7 @@ public class BaseMethods {
         options = new ChromeOptions();
         options.addArguments("–no-sandbox");
         options.addArguments("–disable-dev-shm-usage");
-        options.setExperimentalOption("useAutomationExtension", false);
+        //options.setExperimentalOption("useAutomationExtension", false);
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
