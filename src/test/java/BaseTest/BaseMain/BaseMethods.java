@@ -41,7 +41,7 @@ public class BaseMethods {
         WebDriverManager.chromedriver().setup();
 
         ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
-        builder.withVerbose(false);
+        builder.withVerbose(true);
         builder.withEnvironment(ImmutableMap.of("DISPLAY", ":1"));
         ChromeDriverService chromeDriverService = builder.build();
 
