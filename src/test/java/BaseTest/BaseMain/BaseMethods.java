@@ -38,11 +38,12 @@ public class BaseMethods {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         options = new ChromeOptions();
         options.addArguments("–no-sandbox");
         options.addArguments("–disable-dev-shm-usage");
-        //options.setExperimentalOption("useAutomationExtension", false);
+        options.setExperimentalOption("useAutomationExtension", false);
+        options.setBinary("/usr/local/bin/chromedriver");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
