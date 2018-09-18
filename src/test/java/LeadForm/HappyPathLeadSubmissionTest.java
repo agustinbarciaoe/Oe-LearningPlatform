@@ -30,6 +30,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             dropdown.selectByValue("ar");
             driver.findElement(By.id("state-select"));
             dropdown = new Select(driver.findElement(By.id("state-select")));
+            TimeUnit.SECONDS.sleep(3);
             dropdown.selectByValue("178");
             driver.findElement(By.id("city-select"));
             dropdown = new Select(driver.findElement(By.id("city-select")));
