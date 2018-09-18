@@ -136,9 +136,11 @@ public class BaseMethods {
     }
 
     @AfterClass
-    public static void tearDownDriver() {
-        driver.close();
-        driver.quit();
+    public void tearDownDriver() {
+        if (driver != null) {
+            driver.quit();
+        }
+
     }
 
 }
