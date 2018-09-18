@@ -7,13 +7,15 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 @Listeners(CustomTestListener.class)
 public class HappyPathLeadSubmissionTest extends BaseMethods {
 
 
 
     @Test
-    public void leadSubmission(){
+    public void leadSubmission() throws InterruptedException {
 
         setCaseID(44787);
         setCaseComment("Happy path lead submission");
@@ -31,6 +33,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             dropdown.selectByValue("178");
             driver.findElement(By.id("city-select"));
             dropdown = new Select(driver.findElement(By.id("city-select")));
+            TimeUnit.SECONDS.sleep(3);
             dropdown.selectByValue("245");
             driver.findElement(By.xpath("//*[@id=\"phone-format-selector\"]/label[1]")).click();
             driver.findElement(By.xpath("//*[@id=\"phone-inputs\"]/input[3]")).sendKeys("2222");

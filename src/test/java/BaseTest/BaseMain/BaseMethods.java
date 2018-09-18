@@ -35,7 +35,7 @@ public class BaseMethods {
     //Inicializacion del web driver
 
     @BeforeClass
-    public static void inizialitation(){
+    public static void initialization(){
 
        // String respath = "/usr/local/bin/chromedriver";
        // System.setProperty("webdriver.chrome.driver", respath); // "C:\\Users\\Agustin Barcia\\IdeaProjects\\oemaven\\src\\main\\resources\\chromedriver.exe");
