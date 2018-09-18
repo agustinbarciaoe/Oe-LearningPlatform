@@ -3,12 +3,14 @@ package BaseTest.BaseMain;
 import com.google.common.collect.ImmutableMap;
 import com.gurok.APIClient;
 import com.gurok.APIException;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -38,12 +40,15 @@ public class BaseMethods {
        // String respath = "/usr/local/bin/chromedriver";
        // System.setProperty("webdriver.chrome.driver", respath); // "C:\\Users\\Agustin Barcia\\IdeaProjects\\oemaven\\src\\main\\resources\\chromedriver.exe");
 
-        WebDriverManager.chromedriver().setup();
+       // WebDriverManager.chromedriver().setup();
 
+        WebDriverManager.firefoxdriver().setup();
+
+/*
         ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
         builder.withVerbose(false);
         builder.withEnvironment(ImmutableMap.of("DISPLAY", ":1"));
-        ChromeDriverService chromeDriverService = builder.build();
+      / ChromeDriverService chromeDriverService = builder.build();
 
 
         ChromeOptions options = new ChromeOptions();
@@ -61,8 +66,10 @@ public class BaseMethods {
 
 
         //options.setBinary("/usr/local/bin/chromedriver");
+*/
+        // driver = new ChromeDriver(chromeDriverService,options);
+        driver = new FirefoxDriver();
 
-        driver = new ChromeDriver(chromeDriverService,options);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
