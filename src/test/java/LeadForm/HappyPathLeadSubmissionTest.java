@@ -17,7 +17,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     @Test
     public void leadSubmission() throws InterruptedException {
 
-        setCaseID(44788);
+        setCaseID(44787);
         setCaseComment("Happy path lead submission");
 
             driver.get("https://www.stg.openenglish.com/");
