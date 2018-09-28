@@ -85,7 +85,7 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void regionRequerido(){
 
-        setCaseID(44792);
+        setCaseID(45670);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
 
         driver.get("https://www.stg.openenglish.com/");
