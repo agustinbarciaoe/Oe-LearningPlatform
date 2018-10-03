@@ -1,21 +1,17 @@
 package BaseTest.BaseMain;
 
-import com.google.common.collect.ImmutableMap;
 import com.gurok.APIClient;
 import com.gurok.APIException;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -35,41 +31,11 @@ public class BaseMethods {
     //Inicializacion del web driver
 
     @BeforeClass
-    public static void initialization(){
+    public static void inizialitation(){
 
-       // String respath = "/usr/local/bin/chromedriver";
-       // System.setProperty("webdriver.chrome.driver", respath); // "C:\\Users\\Agustin Barcia\\IdeaProjects\\oemaven\\src\\main\\resources\\chromedriver.exe");
-
-       // WebDriverManager.chromedriver().setup();
-
-        WebDriverManager.firefoxdriver().setup();
-
-/*
-        ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
-        builder.withVerbose(false);
-        builder.withEnvironment(ImmutableMap.of("DISPLAY", ":1"));
-      / ChromeDriverService chromeDriverService = builder.build();
-
-
-        ChromeOptions options = new ChromeOptions();
-
-        options.addArguments("--headless");
-
-        options.addArguments("–no-sandbox");
-        options.addArguments("–disable-dev-shm-usage");
-        options.setExperimentalOption("useAutomationExtension", false);
-
-        options.addArguments("start-maximized"); // open Browser in maximized mode
-        options.addArguments("disable-infobars"); // disabling infobars
-        options.addArguments("--disable-extensions"); // disabling extensions
-        options.addArguments("--disable-gpu"); // applicable to windows os only
-
-
-        //options.setBinary("/usr/local/bin/chromedriver");
-*/
-        // driver = new ChromeDriver(chromeDriverService,options);
-        driver = new FirefoxDriver();
-
+        String respath = "src/main/resources/chromedriver";
+        System.setProperty("webdriver.chrome.driver", respath); // "C:\\Users\\Agustin Barcia\\IdeaProjects\\oemaven\\src\\main\\resources\\chromedriver.exe");
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
@@ -127,20 +93,24 @@ public class BaseMethods {
         APIClient client = new APIClient("https://openeducation.testrail.net/");
         client.setUser("agustin.barcia@openenglish.com");
         client.setPassword("0232049021Ajb!");
+        Exception e = null;
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        String sStackTrace = sw.toString(); // stack trace as a string
+        System.out.println(sStackTrace);
         Map data = new HashMap();
         data.put("status_id", new Integer(5));
         data.put("custom_environment", new Integer(1));
-        data.put("comment", caseComment);
+        data.put("comment", caseComment + ' ' + sStackTrace);
         JSONObject r = (JSONObject) client.sendPost("add_result/"+caseID, data);
 
     }
 
     @AfterClass
-    public void tearDownDriver() {
-        if (driver != null) {
-            driver.quit();
-        }
-
+    public static void tearDownDriver() {
+        driver.close();
+        driver.quit();
     }
 
 }

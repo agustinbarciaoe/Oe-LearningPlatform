@@ -1,6 +1,5 @@
-package BaseTest;
+package BaseTest.BaseMain;
 
-import BaseTest.BaseMain.BaseMethods;
 import com.gurok.APIException;
 import org.testng.ITestContext;
 import org.testng.ITestListener;

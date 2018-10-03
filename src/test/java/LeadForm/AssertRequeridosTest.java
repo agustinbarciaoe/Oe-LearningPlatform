@@ -1,16 +1,13 @@
 package LeadForm;
 
 import BaseTest.BaseMain.BaseMethods;
-import BaseTest.CustomTestListener;
-import com.gurok.APIClient;
-import org.json.simple.JSONObject;
+import BaseTest.BaseMain.CustomTestListener;
 import org.openqa.selenium.By;
-import org.testng.annotations.*;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
-
 
 @Listeners(CustomTestListener.class)
 public class AssertRequeridosTest extends BaseMethods {
@@ -30,12 +27,10 @@ public class AssertRequeridosTest extends BaseMethods {
     }
     */
 
-
-
     @Test
     public void leadformtitle(){
 
-        setCaseID(45668);
+        setCaseID(44791);
         setCaseComment("Verificando que el titulo del leadform sea correcto");
         driver.get("https://www.stg.openenglish.com/");
         assertEquals(driver.findElement(By.id("leadform-title")).getText(), "Empieza a Aprender Inglés");
@@ -45,7 +40,7 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void requerido(){
 
-        setCaseID(45679);
+        setCaseID(44788);
         setCaseComment("Verificando que el div 'required' sea mostrado");
         driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("required-div"));
@@ -56,7 +51,7 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void nombreRequerido(){
 
-        setCaseID(45669);
+        setCaseID(44789);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible!!!!");
         driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("firstname-input"));
@@ -85,16 +80,11 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void regionRequerido(){
 
-        setCaseID(45670);
+        setCaseID(44792);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
 
         driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("lastname-input"));
         assertTrue(driver.findElement(By.id("state-select")).getAttribute("placeholder").contains("Region"));
     }
-
-
-
-
-
 }
