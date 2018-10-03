@@ -129,10 +129,10 @@ public class BaseMethods  {
         APIClient client = new APIClient("https://openeducation.testrail.net/");
         client.setUser("agustin.barcia@openenglish.com");
         client.setPassword("0232049021Ajb!");
-        Exception e = null;
+        //Exception e = null;
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
-        e.printStackTrace(pw);
+        new Exception().printStackTrace(pw);
         String sStackTrace = sw.toString(); // stack trace as a string
         Map data = new HashMap();
         data.put("status_id", new Integer(5));
