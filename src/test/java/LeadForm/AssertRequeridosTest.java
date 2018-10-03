@@ -30,7 +30,7 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void leadformtitle(){
 
-        setCaseID(44791);
+        setCaseID(45668);
         setCaseComment("Verificando que el titulo del leadform sea correcto");
         driver.get("https://www.stg.openenglish.com/");
         assertEquals(driver.findElement(By.id("leadform-title")).getText(), "Empieza a Aprender Inglés");
@@ -40,7 +40,7 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void requerido(){
 
-        setCaseID(44788);
+        setCaseID(45679);
         setCaseComment("Verificando que el div 'required' sea mostrado");
         driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("required-div"));
@@ -51,7 +51,7 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void nombreRequerido(){
 
-        setCaseID(44789);
+        setCaseID(45669);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible!!!!");
         driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("firstname-input"));
@@ -61,7 +61,7 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void apellidoRequerido(){
 
-        setCaseID(44790);
+        setCaseID(45670);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
         driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("lastname-input"));
@@ -70,7 +70,7 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void correoRequerido(){
 
-        setCaseID(44791);
+        setCaseID(45671);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
         driver.get("https://www.stg.openenglish.com/");
         //driver.findElement(By.id("emailaddress-input"));
@@ -80,7 +80,7 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void regionRequerido(){
 
-        setCaseID(44792);
+        setCaseID(45672);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
 
         driver.get("https://www.stg.openenglish.com/");
