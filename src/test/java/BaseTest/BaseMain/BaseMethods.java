@@ -16,6 +16,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -120,17 +122,22 @@ public class BaseMethods  {
 
     }
 
-    //post a test rail para un test ok
+    //post a test rail para un test failed
 
     public void testFailed() throws IOException, APIException {
 
         APIClient client = new APIClient("https://openeducation.testrail.net/");
         client.setUser("agustin.barcia@openenglish.com");
         client.setPassword("0232049021Ajb!");
+        Exception e = null;
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        String sStackTrace = sw.toString(); // stack trace as a string
         Map data = new HashMap();
         data.put("status_id", new Integer(5));
         data.put("custom_environment", new Integer(1));
-        data.put("comment", caseComment);
+        data.put("comment", caseComment + ' ' + sStackTrace);
         JSONObject r = (JSONObject) client.sendPost("add_result/"+caseID, data);
 
     }
