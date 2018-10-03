@@ -137,7 +137,7 @@ public class BaseMethods  {
         Map data = new HashMap();
         data.put("status_id", new Integer(5));
         data.put("custom_environment", new Integer(1));
-        data.put("comment", caseComment + ' ' + sStackTrace);
+        data.put("comment", "Error en:" + ' ' + sStackTrace);
         JSONObject r = (JSONObject) client.sendPost("add_result/"+caseID, data);
 
     }
