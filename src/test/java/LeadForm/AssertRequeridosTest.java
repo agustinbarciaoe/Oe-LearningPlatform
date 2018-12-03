@@ -3,6 +3,7 @@ package LeadForm;
 import BaseTest.BaseMain.BaseMethods;
 import BaseTest.BaseMain.CustomTestListener;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -32,7 +33,7 @@ public class AssertRequeridosTest extends BaseMethods {
 
         setCaseID(45668);
         setCaseComment("Verificando que el titulo del leadform sea correcto");
-        driver.get("https://www.stg.openenglish.com/");
+        //driver.get("https://www.stg.openenglish.com/");
         assertEquals(driver.findElement(By.id("leadform-title")).getText(), "Empieza a Aprender Inglés");
 
     }
@@ -42,7 +43,7 @@ public class AssertRequeridosTest extends BaseMethods {
 
         setCaseID(45679);
         setCaseComment("Verificando que el div 'required' sea mostrado");
-        driver.get("https://www.stg.openenglish.com/");
+        //driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("required-div"));
         assertTrue(driver.findElement(By.id("required-div")).getText().matches("^[\\s\\S]* Requerido$"));
 
@@ -53,7 +54,7 @@ public class AssertRequeridosTest extends BaseMethods {
 
         setCaseID(45669);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible!!!!");
-        driver.get("https://www.stg.openenglish.com/");
+       //driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("firstname-input"));
         assertTrue(driver.findElement(By.id("firstname-input")).getAttribute("placeholder").contains("Nombre"));
     }
@@ -63,7 +64,7 @@ public class AssertRequeridosTest extends BaseMethods {
 
         setCaseID(45670);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
-        driver.get("https://www.stg.openenglish.com/");
+        //driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("lastname-input"));
         assertTrue(driver.findElement(By.id("lastname-input")).getAttribute("placeholder").contains("Apellido"));
     }
@@ -72,7 +73,7 @@ public class AssertRequeridosTest extends BaseMethods {
 
         setCaseID(45671);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
-        driver.get("https://www.stg.openenglish.com/");
+        //driver.get("https://www.stg.openenglish.com/");
         //driver.findElement(By.id("emailaddress-input"));
         assertTrue(driver.findElement(By.id("emailaddress-input")).getAttribute("placeholder").contains("Correo"));
     }
@@ -83,8 +84,9 @@ public class AssertRequeridosTest extends BaseMethods {
         setCaseID(45672);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
 
-        driver.get("https://www.stg.openenglish.com/");
-        driver.findElement(By.id("lastname-input"));
-        assertTrue(driver.findElement(By.id("state-select")).getAttribute("placeholder").contains("Region"));
+        //driver.get("https://www.stg.openenglish.com/");
+        Select regionDropdown= new Select(driver.findElement(By.id("state-select")));
+        assertTrue(regionDropdown.getFirstSelectedOption().getText().contains("Región"));
+
     }
 }

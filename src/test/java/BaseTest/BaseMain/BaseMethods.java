@@ -42,7 +42,7 @@ public class BaseMethods  {
        // String respath = "/usr/local/bin/chromedriver";
        // System.setProperty("webdriver.chrome.driver", respath); // "C:\\Users\\Agustin Barcia\\IdeaProjects\\oemaven\\src\\main\\resources\\chromedriver.exe");
 
-       // WebDriverManager.chromedriver().setup();
+        //WebDriverManager.chromedriver().setup();
 
         WebDriverManager.firefoxdriver().setup();
 
@@ -69,10 +69,11 @@ public class BaseMethods  {
 
         //options.setBinary("/usr/local/bin/chromedriver");
 */
-        // driver = new ChromeDriver(chromeDriverService,options);
+         //driver = new ChromeDriver(chromeDriverService,options);
         driver = new FirefoxDriver();
 
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.get("https://www.stg.openenglish.com/");
     }
 
     //setter
@@ -132,7 +133,7 @@ public class BaseMethods  {
         //Exception e = null;
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
-        new Exception().printStackTrace(pw);
+        new Error().printStackTrace(pw);
         String sStackTrace = sw.toString(); // stack trace as a string
         Map data = new HashMap();
         data.put("status_id", new Integer(5));
