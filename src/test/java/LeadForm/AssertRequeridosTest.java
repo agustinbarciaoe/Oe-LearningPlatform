@@ -44,7 +44,7 @@ public class AssertRequeridosTest extends BaseMethods {
         setCaseID(45679);
         setCaseComment("Verificando que el div 'required' sea mostrado");
         //driver.get("https://www.stg.openenglish.com/");
-        driver.findElement(By.id("required-div"));
+        //driver.findElement(By.id("required-div"));
         assertTrue(driver.findElement(By.id("required-div")).getText().matches("^[\\s\\S]* Requerido$"));
 
     }
@@ -55,7 +55,7 @@ public class AssertRequeridosTest extends BaseMethods {
         setCaseID(45669);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible!!!!");
        //driver.get("https://www.stg.openenglish.com/");
-        driver.findElement(By.id("firstname-input"));
+        //driver.findElement(By.id("firstname-input"));
         assertTrue(driver.findElement(By.id("firstname-input")).getAttribute("placeholder").contains("Nombre"));
     }
 
@@ -65,7 +65,7 @@ public class AssertRequeridosTest extends BaseMethods {
         setCaseID(45670);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
         //driver.get("https://www.stg.openenglish.com/");
-        driver.findElement(By.id("lastname-input"));
+        //driver.findElement(By.id("lastname-input"));
         assertTrue(driver.findElement(By.id("lastname-input")).getAttribute("placeholder").contains("Apellido"));
     }
     @Test

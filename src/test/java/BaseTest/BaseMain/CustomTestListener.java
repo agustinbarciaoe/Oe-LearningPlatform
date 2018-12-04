@@ -41,6 +41,8 @@ public class CustomTestListener<context> extends BaseMethods implements ITestLis
     public void onTestSkipped(ITestResult result) {
 
     }
+
+
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 
