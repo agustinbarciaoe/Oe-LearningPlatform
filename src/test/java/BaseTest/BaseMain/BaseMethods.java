@@ -15,11 +15,13 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import javax.mail.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -91,10 +93,10 @@ public class BaseMethods  {
     // Random email
 
     public static String randomEmail() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
-        while (salt.length() < 10) { // length of the random string.
+        while (salt.length() < 6) { // length of the random string.
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
@@ -141,6 +143,65 @@ public class BaseMethods  {
         data.put("comment", "Error en:" + ' ' + sStackTrace);
         JSONObject r = (JSONObject) client.sendPost("add_result/"+caseID, data);
 
+    }
+
+    public static boolean verifyMail(String userName, String password, String message) {
+        Folder folder = null;
+        Store store = null;
+        System.out.println("***READING MAILBOX...");
+        try {
+            Properties props = new Properties();
+            props.put("mail.store.protocol", "imaps");
+            Session session = Session.getInstance(props);
+            store = session.getStore("imaps");
+            store.connect("imap.gmail.com", userName, password);
+            folder = store.getFolder("INBOX");
+            folder.open(Folder.READ_ONLY);
+            Message[] messages = folder.getMessages();
+            System.out.println("No of Messages : " + folder.getMessageCount());
+            System.out.println("No of Unread Messages : " + folder.getUnreadMessageCount());
+            for (int i = messages.length - 1; i >= 0; i--) {
+                System.out.println("Reading MESSAGE # " + (i + 1) + "...");
+
+                Message msg = messages[i];
+                String strMailSubject = "", strMailBody = "";
+                // Getting mail subject
+                Object subject = msg.getSubject();
+                // Getting mail body
+                Object content = msg.getContent();
+                // Casting objects of mail subject and body into String
+                strMailSubject = (String) subject;
+                System.out.println("Subject del mail evaluado: "+strMailSubject);
+                //---- This is what you want to do------
+                if (strMailSubject.contains(message)) {
+                    System.out.println(strMailSubject);
+                    break;
+                }
+            }
+            return true;
+        } catch (MessagingException messagingException) {
+            messagingException.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } finally {
+            if (folder != null) {
+                try {
+                    folder.close(true);
+                } catch (MessagingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            if (store != null) {
+                try {
+                    store.close();
+                } catch (MessagingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
     }
 
     @AfterClass
