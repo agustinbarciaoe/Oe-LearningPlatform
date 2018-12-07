@@ -89,4 +89,19 @@ public class AssertRequeridosTest extends BaseMethods {
         assertTrue(regionDropdown.getFirstSelectedOption().getText().contains("Región"));
 
     }
+
+    @Test
+    public void verifyMandatoryFields() {
+        setCaseID(46862);
+        setCaseComment("Verificando que todos los mensajes de Requerido se visualicen");
+
+        driver.findElement(By.id("submit-button")).click();
+        assertTrue(
+                driver.findElement(By.xpath("//*[@id=\"leadForm\"]/div[1]/div[2]/div/span")).isDisplayed()&&
+                driver.findElement(By.xpath("//*[@id=\"leadForm\"]/div[1]/div[3]/div/span")).isDisplayed() &&
+                driver.findElement(By.xpath("//*[@id=\"leadForm\"]/div[1]/div[4]/div/span")).isDisplayed() &&
+                driver.findElement(By.xpath("//*[@id=\"leadForm\"]/div[1]/div[6]/div/span")).isDisplayed() &&
+                driver.findElement(By.xpath("//*[@id=\"leadForm\"]/div[1]/div[9]/div/div[2]/span")).isDisplayed()
+        );
+    }
 }

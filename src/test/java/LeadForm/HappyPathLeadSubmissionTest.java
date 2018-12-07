@@ -2,8 +2,14 @@ package LeadForm;
 
 import BaseTest.BaseMain.BaseMethods;
 import BaseTest.BaseMain.CustomTestListener;
+import javafx.scene.layout.Priority;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -16,10 +22,11 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     public String emailRandom;
     public static String nameRandom = "NAME"+randomEmail();
+  //  WebDriverWait wait = new WebDriverWait(driver, 15);
 
 
 
-    @Test
+    @Test (priority=0)
     public void leadSubmission() throws InterruptedException {
 
         setCaseID(44787);
@@ -57,9 +64,38 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             //driver.wait(10);
            // verifyMail(emailRandom,"trinity110","cómo funciona");
         }
-    @Test
+
+
+
+    @Test (priority = 1)
     public void verifyRegistrationEmail() throws InterruptedException {
+        setCaseID(44787);
+        setCaseComment("Verifying Thank You email arrived");
         System.out.println(nameRandom);
         assertTrue((verifyMail("martin.tellechea@openenglish.com","trinity110",nameRandom)));
+    }
+
+    @Test (priority = 2)
+    public void openSalesTool() {
+        setCaseID(11111);
+        setCaseComment("Loggin in to SF and opening SalesTool");
+        driver.get("https://openeducation--stg.cs77.my.salesforce.com/");
+        driver.findElement(By.id("username")).sendKeys("martin.tellechea@openenglish.com.stg");
+        driver.findElement(By.id("password")).sendKeys("trinity112");
+        driver.findElement(By.id("Login")).click();
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Lead_Tab")));
+        //driver.findElement(By.id("Lead_Tab")).click();
+        //dropdown = new Select(driver.findElement(By.id("fcf")));
+        //dropdown.selectByValue("00Bi0000001HgOJ");
+        //driver.findElement(By.name("go")).click();
+        driver.findElement(By.id("phSearchInput")).sendKeys("NAMEJSWMII");
+        //driver.findElement(By.id("phSearchInput")).click();
+        driver.findElement(By.id("phSearchInput")).sendKeys(Keys.RETURN);
+        //driver.findElement(By.id("phSearchButton")).click();
+        //driver.findElement(By.id("phSearchButton")).click();
+       // driver.findElement(By.xpath("//*[@id=\"phSearchButton\"]")).click();
+        driver.findElement(By.className("dataCell")).click();
+
+
     }
 }
