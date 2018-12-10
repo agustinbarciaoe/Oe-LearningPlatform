@@ -79,6 +79,8 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     public void openSalesTool() {
         setCaseID(11111);
         setCaseComment("Loggin in to SF and opening SalesTool");
+        //WebDriverWait wait = new WebDriverWait(driver, 15);
+
         driver.get("https://openeducation--stg.cs77.my.salesforce.com/");
         driver.findElement(By.id("username")).sendKeys("martin.tellechea@openenglish.com.stg");
         driver.findElement(By.id("password")).sendKeys("trinity112");
@@ -95,6 +97,13 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         //driver.findElement(By.id("phSearchButton")).click();
        // driver.findElement(By.xpath("//*[@id=\"phSearchButton\"]")).click();
         driver.findElement(By.className("dataCell")).click();
+        driver.findElement(By.name("sales_tool")).click();
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSelecta0D0t000001mxWbEAI")));
+        driver.findElement(By.id("btnSelecta0D0t000001mxWbEAI")).click();
+        driver.findElement (By.id("j_id0:stco:j_id217:mainForm:j_id228:0:j_id245:0:cmdProcess")).click();
+        driver.findElement(By.id("j_id0:stco:j_id217:mainForm:cmdProcess")).click();
+
+
 
 
     }
