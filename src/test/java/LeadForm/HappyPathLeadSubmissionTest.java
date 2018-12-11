@@ -100,7 +100,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         //dropdown = new Select(driver.findElement(By.id("fcf")));
         //dropdown.selectByValue("00Bi0000001HgOJ");
         //driver.findElement(By.name("go")).click();
-        driver.findElement(By.id("phSearchInput")).sendKeys("NAMEYTEPEC");
+        driver.findElement(By.id("phSearchInput")).sendKeys(nameRandom);
         try { Thread.sleep(10000);}
             catch(InterruptedException ex) {Thread.currentThread().interrupt();}
         //driver.findElement(By.id("phSearchInput")).click();
