@@ -75,7 +75,7 @@ public class BaseMethods  {
         driver = new FirefoxDriver();
 
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        driver.get("https://www.stg.openenglish.com/");
+        //driver.get("https://www.stg.openenglish.com/");
     }
 
     //setter

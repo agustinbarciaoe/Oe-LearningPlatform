@@ -32,11 +32,11 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         setCaseID(44787);
         setCaseComment("Happy path lead submission");
 
-            //driver.get("https://www.stg.openenglish.com/");
+            driver.get("https://www.stg.openenglish.com/");
             driver.findElement(By.id("firstname-input")).sendKeys(nameRandom);
             driver.findElement(By.id("lastname-input")).sendKeys("placement");
             driver.findElement(By.id("emailaddress-input")).clear();
-            emailRandom = "martin.tellechea+"+ randomEmail()+ "@openenglish.com";
+            emailRandom = "martin.tellechea+"+ nameRandom+ "@openenglish.com";
             //driver.findElement(By.id("emailaddress-input")).sendKeys("agustin.barcia+" + randomEmail() + "@openenglish.com");
             driver.findElement(By.id("emailaddress-input")).sendKeys(emailRandom);
             //driver.findElement(By.id("country-select"));
@@ -71,15 +71,25 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     public void verifyRegistrationEmail() throws InterruptedException {
         setCaseID(44787);
         setCaseComment("Verifying Thank You email arrived");
+
         System.out.println(nameRandom);
+
+        try
+        {
+            Thread.sleep(10000);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
         assertTrue((verifyMail("martin.tellechea@openenglish.com","trinity110",nameRandom)));
     }
 
     @Test (priority = 2)
     public void openSalesTool() {
         setCaseID(11111);
-        setCaseComment("Loggin in to SF and opening SalesTool");
-        //WebDriverWait wait = new WebDriverWait(driver, 15);
+        setCaseComment("Loggin in to SF and opening SalesTool until CC input");
+        WebDriverWait wait = new WebDriverWait(driver, 60);
 
         driver.get("https://openeducation--stg.cs77.my.salesforce.com/");
         driver.findElement(By.id("username")).sendKeys("martin.tellechea@openenglish.com.stg");
@@ -90,21 +100,54 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         //dropdown = new Select(driver.findElement(By.id("fcf")));
         //dropdown.selectByValue("00Bi0000001HgOJ");
         //driver.findElement(By.name("go")).click();
-        driver.findElement(By.id("phSearchInput")).sendKeys("NAMEJSWMII");
+        driver.findElement(By.id("phSearchInput")).sendKeys("NAMEYTEPEC");
+        try { Thread.sleep(10000);}
+            catch(InterruptedException ex) {Thread.currentThread().interrupt();}
         //driver.findElement(By.id("phSearchInput")).click();
         driver.findElement(By.id("phSearchInput")).sendKeys(Keys.RETURN);
         //driver.findElement(By.id("phSearchButton")).click();
         //driver.findElement(By.id("phSearchButton")).click();
-       // driver.findElement(By.xpath("//*[@id=\"phSearchButton\"]")).click();
+        // driver.findElement(By.xpath("//*[@id=\"phSearchButton\"]")).click();
         driver.findElement(By.className("dataCell")).click();
-        driver.findElement(By.name("sales_tool")).click();
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSelecta0D0t000001mxWbEAI")));
-        driver.findElement(By.id("btnSelecta0D0t000001mxWbEAI")).click();
-        driver.findElement (By.id("j_id0:stco:j_id217:mainForm:j_id228:0:j_id245:0:cmdProcess")).click();
-        driver.findElement(By.id("j_id0:stco:j_id217:mainForm:cmdProcess")).click();
+          driver.findElement(By.name("sales_tool")).click();
+        driver.findElement(By.id("btnSelecta0D0t000001mxWbEAI")).click(); //SELECT DISCOUNT
+        driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id228:0:j_id245:0:cmdProcess")).click(); // ADD
+        driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id338")).click(); // CHECKBOX "Assign a license to the buyer"
+        driver.findElement(By.id("j_id0:stco:j_id217:mainForm:cmdProcess")).click(); // CONFIRM
 
+        driver.switchTo().frame(driver.findElement(By.id("immediateCapture_iframe")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("numberInput")));
+        driver.findElement(By.id("numberInput")).sendKeys("4012 8888 8888 1881");
+        driver.findElement(By.id("expirationInput")).sendKeys("01/2025");
+        driver.findElement(By.id("nameInput")).sendKeys(nameRandom);
+        driver.findElement(By.id("securityCodeInput")).sendKeys("888");
+        driver.findElement(By.id("documentNoInput")).sendKeys("25598000");
+        driver.findElement(By.id("contractHolderNameInput")).sendKeys("NAMEOUJOZT");
 
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame(driver.findElement(By.id("immediateCapture_iframe")));
+
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ng-binding")));
+        try { Thread.sleep(10000);}
+        catch(InterruptedException ex) {Thread.currentThread().interrupt();}
+        driver.findElement(By.xpath("//*[@id=\"contract-checkboxes\"]/div[1]/label")).click(); // Accept Terms
+        driver.findElement(By.xpath("//*[@id=\"contract-checkboxes\"]/div[2]/label")).click(); // Term of Course
+        driver.findElement(By.id("submitBtn")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("/html/body/div[1]/div/div/div/div[2]/i"))); // Checkbox OK
+
+        assertTrue(driver.findElement(By.id("submitBtn")).getText().contains("SUBMIT PAYMENT"));
+        driver.findElement(By.name("j_id0:stco:j_id217:mainForm:j_id370")).click();
+        driver.switchTo().defaultContent();
+    }
+
+    @Test (priority = 3)
+        public void verifyPurchaseEmail() throws InterruptedException {
+            setCaseID(44789);
+            setCaseComment("Verifying Purchase confirmation email arrived");
+            System.out.println(nameRandom);
+            assertTrue((verifyMail("martin.tellechea@openenglish.com","trinity110","Congratulations on your purchase of Open English")));
+        }
 
 
     }
-}
+
