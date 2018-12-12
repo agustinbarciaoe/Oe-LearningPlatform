@@ -100,11 +100,13 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         //dropdown = new Select(driver.findElement(By.id("fcf")));
         //dropdown.selectByValue("00Bi0000001HgOJ");
         //driver.findElement(By.name("go")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("phSearchInput")));
         driver.findElement(By.id("phSearchInput")).sendKeys(nameRandom);
         try { Thread.sleep(10000);}
             catch(InterruptedException ex) {Thread.currentThread().interrupt();}
         //driver.findElement(By.id("phSearchInput")).click();
         driver.findElement(By.id("phSearchInput")).sendKeys(Keys.RETURN);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dataCell")));
         //driver.findElement(By.id("phSearchButton")).click();
         //driver.findElement(By.id("phSearchButton")).click();
         // driver.findElement(By.xpath("//*[@id=\"phSearchButton\"]")).click();
@@ -112,7 +114,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
           driver.findElement(By.name("sales_tool")).click();
         driver.findElement(By.id("btnSelecta0D0t000001mxWbEAI")).click(); //SELECT DISCOUNT
         driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id228:0:j_id245:0:cmdProcess")).click(); // ADD
-        driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id338")).click(); // CHECKBOX "Assign a license to the buyer"
+//        driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id338")).click(); // CHECKBOX "Assign a license to the buyer"
         driver.findElement(By.id("j_id0:stco:j_id217:mainForm:cmdProcess")).click(); // CONFIRM
 
         driver.switchTo().frame(driver.findElement(By.id("immediateCapture_iframe")));
@@ -122,18 +124,20 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         driver.findElement(By.id("nameInput")).sendKeys(nameRandom);
         driver.findElement(By.id("securityCodeInput")).sendKeys("888");
         driver.findElement(By.id("documentNoInput")).sendKeys("25598000");
-        driver.findElement(By.id("contractHolderNameInput")).sendKeys("NAMEOUJOZT");
+        driver.findElement(By.id("documentNoInput")).sendKeys(Keys.TAB);
+        driver.findElement(By.id("contractHolderNameInput")).sendKeys(nameRandom);
 
         driver.switchTo().defaultContent();
         driver.switchTo().frame(driver.findElement(By.id("immediateCapture_iframe")));
 
         //wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ng-binding")));
-        try { Thread.sleep(10000);}
+        try { Thread.sleep(20000);}
         catch(InterruptedException ex) {Thread.currentThread().interrupt();}
-        driver.findElement(By.xpath("//*[@id=\"contract-checkboxes\"]/div[1]/label")).click(); // Accept Terms
-        driver.findElement(By.xpath("//*[@id=\"contract-checkboxes\"]/div[2]/label")).click(); // Term of Course
+        //driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/form/div[2]/div[3]/div[1]/label")).click(); // Accept Terms
+        driver.findElement(By.xpath("//*[@id=\"contract-checkboxes\"]/div[1]/label")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/form/div[2]/div[3]/div[2]/label")).click(); // Term of Course
         driver.findElement(By.id("submitBtn")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("/html/body/div[1]/div/div/div/div[2]/i"))); // Checkbox OK
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div[2]"))); // Checkbox OK
 
         assertTrue(driver.findElement(By.id("submitBtn")).getText().contains("SUBMIT PAYMENT"));
         driver.findElement(By.name("j_id0:stco:j_id217:mainForm:j_id370")).click();
