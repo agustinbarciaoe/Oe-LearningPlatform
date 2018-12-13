@@ -28,6 +28,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     @Test (priority=0)
     public void leadSubmission() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
 
         setCaseID(44787);
         setCaseComment("Happy path lead submission");
@@ -59,6 +60,8 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             dropdown.selectByValue("4");
            // if (driver.findElement(By.id("cn-accept-cookie")).isEnabled())
            //     driver.findElement(By.id("cn-accept-cookie")).click();
+            TimeUnit.SECONDS.sleep(3);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit-button")));
             driver.findElement(By.id("submit-button")).click();
             assertTrue(driver.findElement(By.id("thankyou-hero-title")).getText().contains("Gracias por dar el primer paso para lograr tu objetivo"));
             //driver.wait(10);
@@ -102,6 +105,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         //driver.findElement(By.name("go")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("phSearchInput")));
         driver.findElement(By.id("phSearchInput")).sendKeys(nameRandom);
+        TimeUnit.SECONDS.sleep(5);
         try { Thread.sleep(10000);}
             catch(InterruptedException ex) {Thread.currentThread().interrupt();}
         //driver.findElement(By.id("phSearchInput")).click();
