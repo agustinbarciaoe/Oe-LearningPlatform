@@ -89,7 +89,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     }
 
     @Test (priority = 2)
-    public void openSalesTool() {
+    public void openSalesTool() throws InterruptedException {
         setCaseID(11111);
         setCaseComment("Loggin in to SF and opening SalesTool until CC input");
         WebDriverWait wait = new WebDriverWait(driver, 60);
