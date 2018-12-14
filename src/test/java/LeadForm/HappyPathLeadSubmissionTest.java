@@ -34,8 +34,10 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         setCaseComment("Happy path lead submission");
 
             driver.get("https://www.stg.openenglish.com/");
+            if (driver.findElement(By.id("cn-accept-cookie")).isDisplayed())
+                driver.findElement(By.id("cn-accept-cookie")).click();
             driver.findElement(By.id("firstname-input")).sendKeys(nameRandom);
-            driver.findElement(By.id("lastname-input")).sendKeys("placement");
+            driver.findElement(By.id("lastname-input")).sendKeys("TestName");
             driver.findElement(By.id("emailaddress-input")).clear();
             emailRandom = "martin.tellechea+"+ nameRandom+ "@openenglish.com";
             //driver.findElement(By.id("emailaddress-input")).sendKeys("agustin.barcia+" + randomEmail() + "@openenglish.com");
@@ -85,7 +87,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         {
             Thread.currentThread().interrupt();
         }
-        assertTrue((verifyMail("martin.tellechea@openenglish.com","trinity110",nameRandom)));
+        assertTrue((verifyMailSubject("martin.tellechea@openenglish.com","trinity110",nameRandom)));
     }
 
     @Test (priority = 2)
@@ -138,13 +140,18 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         try { Thread.sleep(20000);}
         catch(InterruptedException ex) {Thread.currentThread().interrupt();}
         //driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/form/div[2]/div[3]/div[1]/label")).click(); // Accept Terms
-        driver.findElement(By.xpath("//*[@id=\"contract-checkboxes\"]/div[1]/label")).click();
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/form/div[2]/div[3]/div[2]/label")).click(); // Term of Course
+        //driver.findElement(By.xpath("//*[@id=\"contract-checkboxes\"]/div[1]/label")).click();
+        driver.findElement(By.cssSelector("div.checkbox:nth-child(1) > label:nth-child(2)")).click();
+        driver.findElement(By.cssSelector("div.checkbox:nth-child(2) > label:nth-child(2)")).click();
+       // driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/form/div[2]/div[3]/div[2]/label")).click(); // Term of Course
         driver.findElement(By.id("submitBtn")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div[2]"))); // Checkbox OK
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".fa-check"))); // Checkbox OK
+        //wait.until(driver.findElement(By.cssSelector(".success-poll")).isDisplayed());
+        //String bodyText = driver.findElement(By.tagName("body")).getText();
+       // Assert.assertTrue("Text not found!", bodyText.contains(text));
 
-        assertTrue(driver.findElement(By.id("submitBtn")).getText().contains("SUBMIT PAYMENT"));
-        driver.findElement(By.name("j_id0:stco:j_id217:mainForm:j_id370")).click();
+        //assertTrue(driver.findElement(By.id("submitBtn")).getText().contains("SUBMIT PAYMENT"));
+        //driver.findElement(By.name("j_id0:stco:j_id217:mainForm:j_id370")).click();
         driver.switchTo().defaultContent();
     }
 
@@ -153,7 +160,16 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             setCaseID(44789);
             setCaseComment("Verifying Purchase confirmation email arrived");
             System.out.println(nameRandom);
-            assertTrue((verifyMail("martin.tellechea@openenglish.com","trinity110","Congratulations on your purchase of Open English")));
+
+        try
+        {
+            Thread.sleep(30000);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
+            assertTrue((verifyMailContent("martin.tellechea@openenglish.com","trinity110","Hello "+nameRandom,"We are writing to confirm the purchase of your course")));
         }
 
 

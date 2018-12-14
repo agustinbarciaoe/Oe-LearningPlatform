@@ -145,7 +145,7 @@ public class BaseMethods  {
 
     }
 
-    public static boolean verifyMail(String userName, String password, String message) {
+    public static boolean verifyMailSubject(String userName, String password, String message) {
         Folder folder = null;
         Store store = null;
         System.out.println("***READING MAILBOX...");
@@ -202,6 +202,111 @@ public class BaseMethods  {
             }
         }
         return false;
+    }
+
+    public  boolean verifyMailContent(String userName, String password, String message1, String message2) {
+        Folder folder = null;
+        Store store = null;
+        System.out.println("***READING MAILBOX...");
+        try {
+            Properties props = new Properties();
+            props.put("mail.store.protocol", "imaps");
+            Session session = Session.getInstance(props);
+            store = session.getStore("imaps");
+            store.connect("imap.gmail.com", userName, password);
+            folder = store.getFolder("INBOX");
+            folder.open(Folder.READ_ONLY);
+            Message[] messages = folder.getMessages();
+            System.out.println("No of Messages : " + folder.getMessageCount());
+            System.out.println("No of Unread Messages : " + folder.getUnreadMessageCount());
+            for (int i = messages.length - 1; i >= 0; i--) {
+                System.out.println("Reading MESSAGE # " + (i + 1) + "...");
+
+                Message msg = messages[i];
+                String strMailSubject = "", strMailBody = "";
+                // Getting mail subject
+                Object subject = msg.getSubject();
+                // Getting mail body
+                Object content = msg.getContent();
+                // Casting objects of mail subject and body into String
+                strMailBody = (String) getText(msg);
+
+
+                System.out.println("Body del mail evaluado: "+strMailBody);
+                //---- This is what you want to do------
+                if (strMailBody.contains(message1)&&strMailBody.contains(message2)) {
+                    System.out.println(strMailBody);
+                    break;
+                }
+            }
+            return true;
+        } catch (MessagingException messagingException) {
+            messagingException.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } finally {
+            if (folder != null) {
+                try {
+                    folder.close(true);
+                } catch (MessagingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            if (store != null) {
+                try {
+                    store.close();
+                } catch (MessagingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean textIsHtml = false;
+
+    /**
+     * Return the primary text content of the message.
+     */
+    private String getText(Part p) throws
+            MessagingException, IOException {
+        if (p.isMimeType("text/*")) {
+            String s = (String)p.getContent();
+            textIsHtml = p.isMimeType("text/html");
+            return s;
+        }
+
+        if (p.isMimeType("multipart/alternative")) {
+            // prefer html text over plain text
+            Multipart mp = (Multipart)p.getContent();
+            String text = null;
+            for (int i = 0; i < mp.getCount(); i++) {
+                Part bp = mp.getBodyPart(i);
+                if (bp.isMimeType("text/plain")) {
+                    if (text == null)
+                        text = getText(bp);
+                    continue;
+                } else if (bp.isMimeType("text/html")) {
+                    String s = getText(bp);
+                    if (s != null)
+                        return s;
+                } else {
+                    return getText(bp);
+                }
+            }
+            return text;
+        } else if (p.isMimeType("multipart/*")) {
+            Multipart mp = (Multipart)p.getContent();
+            for (int i = 0; i < mp.getCount(); i++) {
+                String s = getText(mp.getBodyPart(i));
+                if (s != null)
+                    return s;
+            }
+        }
+
+        return null;
     }
 
     @AfterClass
