@@ -6,6 +6,8 @@ import com.gurok.APIException;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.json.simple.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -307,6 +309,16 @@ public class BaseMethods  {
         }
 
         return null;
+    }
+
+    protected boolean isElementPresent(By by){
+        try{
+            driver.findElement(by);
+            return true;
+        }
+        catch(NoSuchElementException e){
+            return false;
+        }
     }
 
     @AfterClass

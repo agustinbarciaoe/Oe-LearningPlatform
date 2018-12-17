@@ -4,8 +4,10 @@ import BaseTest.BaseMain.BaseMethods;
 import BaseTest.BaseMain.CustomTestListener;
 import javafx.scene.layout.Priority;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -13,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.sql.Driver;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
@@ -35,7 +38,14 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
             driver.get("https://www.stg.openenglish.com/");
             if (driver.findElement(By.id("cn-accept-cookie")).isDisplayed())
-                driver.findElement(By.id("cn-accept-cookie")).click();
+                try { driver.findElement(By.id("cn-accept-cookie")).click();}
+            catch (Exception e) {
+                if(e.getMessage().contains("is not clickable at point")) {
+
+                }
+            }
+
+
             driver.findElement(By.id("firstname-input")).sendKeys(nameRandom);
             driver.findElement(By.id("lastname-input")).sendKeys("TestName");
             driver.findElement(By.id("emailaddress-input")).clear();
@@ -80,15 +90,13 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         System.out.println(nameRandom);
 
         try
-        {
-            Thread.sleep(10000);
-        }
+        { Thread.sleep(10000); }
         catch(InterruptedException ex)
-        {
-            Thread.currentThread().interrupt();
-        }
+        { Thread.currentThread().interrupt();  }
         assertTrue((verifyMailSubject("martin.tellechea@openenglish.com","trinity110",nameRandom)));
     }
+
+
 
     @Test (priority = 2)
     public void openSalesTool() throws InterruptedException {
@@ -112,6 +120,21 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             catch(InterruptedException ex) {Thread.currentThread().interrupt();}
         //driver.findElement(By.id("phSearchInput")).click();
         driver.findElement(By.id("phSearchInput")).sendKeys(Keys.RETURN);
+        while (isElementPresent(By.cssSelector(".messageText")))
+        {
+            driver.findElement(By.id("secondSearchText")).sendKeys(nameRandom);
+            driver.findElement(By.id("secondSearchButton")).click();
+        }
+
+         /*
+        if (driver.findElement(By.cssSelector(".messageText"))) {
+            while (driver.findElement(By.cssSelector(".messageText")).isEnabled()) {
+                driver.findElement(By.id("secondSearchText")).sendKeys(nameRandom);
+                driver.findElement(By.id("secondSearchButton")).click();
+            }
+        }
+        */
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dataCell")));
         //driver.findElement(By.id("phSearchButton")).click();
         //driver.findElement(By.id("phSearchButton")).click();
@@ -121,6 +144,8 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         driver.findElement(By.id("btnSelecta0D0t000001mxWbEAI")).click(); //SELECT DISCOUNT
         driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id228:0:j_id245:0:cmdProcess")).click(); // ADD
 //        driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id338")).click(); // CHECKBOX "Assign a license to the buyer"
+        if (!driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id352")).isSelected())
+            driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id352")).click();
         driver.findElement(By.id("j_id0:stco:j_id217:mainForm:cmdProcess")).click(); // CONFIRM
 
         driver.switchTo().frame(driver.findElement(By.id("immediateCapture_iframe")));
@@ -141,11 +166,28 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         catch(InterruptedException ex) {Thread.currentThread().interrupt();}
         //driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/form/div[2]/div[3]/div[1]/label")).click(); // Accept Terms
         //driver.findElement(By.xpath("//*[@id=\"contract-checkboxes\"]/div[1]/label")).click();
-        driver.findElement(By.cssSelector("div.checkbox:nth-child(1) > label:nth-child(2)")).click();
-        driver.findElement(By.cssSelector("div.checkbox:nth-child(2) > label:nth-child(2)")).click();
+        //driver.findElement(By.cssSelector("#checkboxAgree")).click();
+
+        //Actions actions = new Actions(driver);
+        //actions.click(driver.findElement(By.cssSelector("#checkboxAgree"))).perform();
+        //actions.click(driver.findElement(By.cssSelector("#checkbox0"))).perform();
+        WebElement checkbox1 = driver.findElement(By.cssSelector("#checkboxAgree"));
+        WebElement checkbox2 = driver.findElement(By.cssSelector("#checkbox0"));
+
+
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click()",checkbox1);
+        js.executeScript("arguments[0].click()",checkbox2);
+
+        //WebElement element = driver.findElement(By.className("ng-binding"));//div[@class='blockUI blockOverlay']");
+        //JavascriptExecutor js = (JavascriptExecutor)driver;
+        //js.executeScript("arguments[0].style.visibility='hidden'", element);
+
+        //driver.findElement(By.name("checkboxAgree")).click();
+        //driver.findElement(By.cssSelector("div.checkbox:nth-child(2) > label:nth-child(2)")).click();
        // driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/form/div[2]/div[3]/div[2]/label")).click(); // Term of Course
         driver.findElement(By.id("submitBtn")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".fa-check"))); // Checkbox OK
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".fa-check"))); // Checkbox OK
         //wait.until(driver.findElement(By.cssSelector(".success-poll")).isDisplayed());
         //String bodyText = driver.findElement(By.tagName("body")).getText();
        // Assert.assertTrue("Text not found!", bodyText.contains(text));
@@ -163,7 +205,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
         try
         {
-            Thread.sleep(30000);
+            Thread.sleep(50000);
         }
         catch(InterruptedException ex)
         {
