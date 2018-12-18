@@ -157,6 +157,7 @@ public class BaseMethods  {
             Session session = Session.getInstance(props);
             store = session.getStore("imaps");
             store.connect("imap.gmail.com", userName, password);
+
             folder = store.getFolder("INBOX");
             folder.open(Folder.READ_ONLY);
             Message[] messages = folder.getMessages();
