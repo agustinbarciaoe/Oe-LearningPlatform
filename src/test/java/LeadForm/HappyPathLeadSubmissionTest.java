@@ -49,7 +49,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         driver.findElement(By.id("firstname-input")).sendKeys(nameRandom);
         driver.findElement(By.id("lastname-input")).sendKeys("TestName");
         driver.findElement(By.id("emailaddress-input")).clear();
-        emailRandom = "martin.tellechea+" + nameRandom + "@openenglish.com";
+        emailRandom = "tester.openenglish+" + nameRandom + "@gmail.com";
         //driver.findElement(By.id("emailaddress-input")).sendKeys("agustin.barcia+" + randomEmail() + "@openenglish.com");
         driver.findElement(By.id("emailaddress-input")).sendKeys(emailRandom);
         //driver.findElement(By.id("country-select"));
