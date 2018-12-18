@@ -205,6 +205,9 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         //assertTrue(driver.findElement(By.id("submitBtn")).getText().contains("SUBMIT PAYMENT"));
         //driver.findElement(By.name("j_id0:stco:j_id217:mainForm:j_id370")).click();
         driver.switchTo().defaultContent();
+        driver.findElement(By.name("j_id0:stco:j_id217:mainForm:j_id384")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("zuora__sync_data_from_zbilling")));
+        driver.findElement(By.name("zuora__sync_data_from_zbilling")).click();
     }
 
     @Test(priority = 3)
