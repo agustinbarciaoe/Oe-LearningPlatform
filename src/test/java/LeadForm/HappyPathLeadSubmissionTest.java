@@ -110,7 +110,8 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         driver.findElement(By.id("phSearchInput")).sendKeys(Keys.RETURN);
         while (isElementPresent(By.cssSelector(".messageText"))) {
             driver.findElement(By.id("secondSearchText")).sendKeys(nameRandom);
-            driver.findElement(By.id("secondSearchButton")).click();
+//            driver.findElement(By.id("secondSearchButton")).click();
+            driver.findElement(By.id("secondSearchText")).sendKeys(Keys.RETURN);
         }
 
          /*
