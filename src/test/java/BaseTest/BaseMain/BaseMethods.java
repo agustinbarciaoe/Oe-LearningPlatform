@@ -1,6 +1,5 @@
 package BaseTest.BaseMain;
 
-import com.google.common.collect.ImmutableMap;
 import com.gurok.APIClient;
 import com.gurok.APIException;
 
@@ -9,11 +8,9 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -40,6 +37,18 @@ public class BaseMethods  {
 
     //Inicializacion del web driver
 
+    public static EmailUtils emailUtils;
+
+    @BeforeClass
+    public static void connectToEmail() {
+        try {
+            emailUtils = new EmailUtils("tester.openenglish@gmail.com", "trinity110", "smtp.gmail.com", EmailUtils.EmailFolder.INBOX);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail(e.getMessage());
+        }
+    }
+
     @BeforeClass
     public static void initialization(){
 
@@ -48,7 +57,7 @@ public class BaseMethods  {
 
         //WebDriverManager.chromedriver().setup();
 
-        WebDriverManager.firefoxdriver().setup();
+
 
 /*
         ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
@@ -74,6 +83,8 @@ public class BaseMethods  {
         //options.setBinary("/usr/local/bin/chromedriver");
 */
          //driver = new ChromeDriver(chromeDriverService,options);
+        WebDriverManager.firefoxdriver().setup();
+
         driver = new FirefoxDriver();
 
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -235,10 +246,10 @@ public class BaseMethods  {
                 strMailBody = (String) getText(msg);
 
 
-                System.out.println("Body del mail evaluado: "+strMailBody);
+                //System.out.println("Body del mail evaluado: "+strMailBody);
                 //---- This is what you want to do------
-                if (strMailBody.contains(message1)&&strMailBody.contains(message2)) {
-                    System.out.println(strMailBody);
+                if (strMailBody.contains(message1)&&strMailSubject.contains(message2)) {
+                    System.out.println("Mail con Subject: "+message2+" y contenido: "+message1+" encontrado!");
                     break;
                 }
             }
@@ -320,6 +331,82 @@ public class BaseMethods  {
         catch(NoSuchElementException e){
             return false;
         }
+    }
+
+
+    public String getActivationLink(String userName, String password, String message, String titulo) {
+        Folder folder = null;
+        Store store = null;
+        System.out.println("***READING MAILBOX...");
+        try {
+            Properties props = new Properties();
+            props.put("mail.store.protocol", "imaps");
+            Session session = Session.getInstance(props);
+            store = session.getStore("imaps");
+            store.connect("imap.gmail.com", userName, password);
+
+            folder = store.getFolder("INBOX");
+            folder.open(Folder.READ_ONLY);
+            Message[] messages = folder.getMessages();
+            System.out.println("No of Messages : " + folder.getMessageCount());
+            System.out.println("No of Unread Messages : " + folder.getUnreadMessageCount());
+            String strMailSubject = "";
+            String strMailBody = "";
+            for (int i = messages.length - 1; i >= 0; i--) {
+                System.out.println("Reading MESSAGE # " + (i + 1) + "...");
+
+                Message msg = messages[i];
+
+                // Getting mail subject
+                Object subject = msg.getSubject();
+                // Getting mail body
+                Object content = msg.getContent();
+                // Casting objects of mail subject and body into String
+                strMailSubject = (String) subject;
+                //strMailBody = (String) content;
+                strMailBody = (String) getText(msg);
+                System.out.println("Subject del mail evaluado: "+strMailSubject);
+                //---- This is what you want to do------
+                if (strMailSubject.contains(titulo)&&strMailBody.contains(message)) {
+                    System.out.println(strMailSubject);
+                    break;
+                }
+            }
+
+            ;
+
+            int indexInicio = strMailBody.indexOf("https://lp3-ui.stg.openenglish.com/activation/");
+            //int indexFin = strMailBody.indexOf("target");
+            System.out.println("IndexInicio: "+indexInicio);
+            //System.out.println("IndexFin: "+indexFin);
+            return strMailBody.substring(indexInicio,indexInicio+107);
+
+
+            //return true;
+
+        } catch (MessagingException messagingException) {
+            messagingException.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } finally {
+            if (folder != null) {
+                try {
+                    folder.close(true);
+                } catch (MessagingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            if (store != null) {
+                try {
+                    store.close();
+                } catch (MessagingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return "No encontrado";
     }
 
     @AfterClass
