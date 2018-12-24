@@ -19,6 +19,7 @@ import BaseTest.BaseMain.EmailUtils;
 
 import javax.mail.Message;
 import java.sql.Driver;
+import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
@@ -109,6 +110,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         //driver.findElement(By.id("phSearchInput")).click();
         driver.findElement(By.id("phSearchInput")).sendKeys(Keys.RETURN);
         while (isElementPresent(By.cssSelector(".messageText"))) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("secondSearchText")));
             driver.findElement(By.id("secondSearchText")).sendKeys(nameRandom);
 //            driver.findElement(By.id("secondSearchButton")).click();
             driver.findElement(By.id("secondSearchText")).sendKeys(Keys.RETURN);
@@ -181,6 +183,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("submitBtn")));
         js.executeScript("arguments[0].click()", driver.findElement(By.id("submitBtn")));
         //driver.findElement(By.id("submitBtn")).click();
+        Thread.sleep(10000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".fa-check"))); // Checkbox OK
         //wait.until(driver.findElement(By.cssSelector(".success-poll")).isDisplayed());
         //String bodyText = driver.findElement(By.tagName("body")).getText();
@@ -194,38 +197,27 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         driver.findElement(By.name("zuora__sync_data_from_zbilling")).click();
     }
 
+
+
     @Test(priority = 3)
-    public void loginToPlatform() {
-
-        setCaseID(22222);
-        setCaseComment("Loggin in to OE Platform");
-        //WebDriverWait wait = new WebDriverWait(driver, 60);
-
-        driver.get("http://learningplatform.stg.openenglish.com/");
-        driver.findElement(By.id("login-email")).sendKeys(emailRandom);
-
-
-    }
-
-    @Test(priority = 4)
     public void verifyRegistrationEmail() throws InterruptedException {
         setCaseID(44787);
         setCaseComment("Verifying Thank You email arrived");
 
         System.out.println(nameRandom);
-/*
+
         try {
-            Thread.sleep(15000);
+            Thread.sleep(50000);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        */
-        assertTrue((verifyMailSubject("tester.openenglish@gmail.com", "trinity110", nameRandom)));
+
+        assertTrue((verifyMailSubject("tester.openenglish@gmail.com", "trinity110", nameRandom+", cómo funciona Open English")));
         //assertTrue((verifyMailSubject("pepe@mailsac.com", null, nameRandom)));
 
     }
 
-    @Test(priority = 5)
+    @Test(priority = 4)
     public void verifyPurchaseEmail() throws InterruptedException {
         setCaseID(44789);
         setCaseComment("Verifying Purchase confirmation email arrived");
@@ -238,7 +230,8 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         //assertTrue((verifyMailContent("pepe@mailsac.com", null , "Hello " + nameRandom, "We are writing to confirm the purchase of your course")));
     }
 
-    @Test(priority = 6)
+    /*
+    @Test(priority = 7)
     public void verifyActivationEmail() throws InterruptedException {
         setCaseID(44789);
         setCaseComment("Verifying Activation email arrived");
@@ -247,20 +240,88 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         try { Thread.sleep(10000);}
         catch (InterruptedException ex) {Thread.currentThread().interrupt();        }
 
-        assertTrue((verifyMailContent("tester.openenglish@gmail.com", "trinity110", "Hola " + nameRandom, "Bienvenido a Open English")));
+        assertTrue((verifyMailContent("tester.openenglish@gmail.com", "trinity110", nameRandom, "Bienvenido a Open English")));
         //assertTrue((verifyMailContent("pepe@mailsac.com", null , "Hello " + nameRandom, "We are writing to confirm the purchase of your course")));
     }
+*/
 
-    @Test (priority = 7)
-    public void ActivateLicense() {
+
+    @Test (priority = 5)
+    public void ActivateLicense()  throws InterruptedException {
         setCaseID(33333);
         setCaseComment("Activating license using link from email");
 
+        //nameRandom = "NAMEMDNSKE";
+
         System.out.println(nameRandom);
 
-        String activationLink = getActivationLink("tester.openenglish@gmail.com", "trinity110", "Hola " + nameRandom, "Bienvenido a Open English");
+        String activationLink = getActivationLink("tester.openenglish@gmail.com", "trinity110", nameRandom, "Bienvenido a Open English");
 
         System.out.println("Link de activación: "+activationLink);
+
+        driver.get(activationLink);
+
+        System.out.println(emailRandom);
+        driver.findElement(By.xpath("//*[@id=\"credentials\"]/div[1]/input")).sendKeys(emailRandom);// pantalla Activación - Email
+        driver.findElement(By.xpath("//*[@id=\"credentials\"]/div[2]/input")).sendKeys(emailRandom);// pantalla Activacion - Confirm Email
+        driver.findElement(By.xpath("//*[@id=\"credentials\"]/div[3]/input")).sendKeys("morpheus110");// pantalla Activación - Password
+        driver.findElement(By.xpath("//*[@id=\"credentials\"]/div[4]/input")).sendKeys("morpheus110");// pantalla Activación - Confirm Password
+        driver.findElement(By.xpath("//*[@id=\"credentials\"]/button")).click(); // botón Next
+
+        try { Thread.sleep(10000);}
+        catch (InterruptedException ex) {Thread.currentThread().interrupt();}
+
+        dropdown = new Select(driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-student-info/div/div[2]/div[2]/div[2]/form/div[3]/lp3-birthdate-picker/form/fieldset/div/div[2]/select")));
+        dropdown.selectByValue("05");
+
+        try { Thread.sleep(5000);}
+        catch (InterruptedException ex) {Thread.currentThread().interrupt();}
+
+        dropdown = new Select(driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-student-info/div/div[2]/div[2]/div[2]/form/div[3]/lp3-birthdate-picker/form/fieldset/div/div[3]/select")));
+        dropdown.selectByValue("05");
+
+        dropdown = new Select(driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-student-info/div/div[2]/div[2]/div[2]/form/div[3]/lp3-birthdate-picker/form/fieldset/div/div[4]/select")));
+        dropdown.selectByValue("1940");
+
+        dropdown = new Select(driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-student-info/div/div[2]/div[2]/div[2]/form/div[4]/select")));
+        dropdown.selectByValue("M");
+
+        driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-student-info/div/div[2]/div[2]/div[2]/form/div[7]/lp3-phone-input/form/div[2]/div/input[3]")).sendKeys("2222");// PHONE PREFIX 1
+        driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-student-info/div/div[2]/div[2]/div[2]/form/div[7]/lp3-phone-input/form/div[2]/div/input[4]")).sendKeys("3333");// PHONE PREFIX 2
+
+        driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-student-info/div/div[2]/div[2]/div[2]/form/button")).click();// CONTINUAR
+
+        driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-placement-quiz/div/div[2]/div[3]/div[2]/div[1]/div/table/tbody/p[1]/tbody/tr/a")).click();// Nivel NO ENGLISH
+
+        driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-placement-quiz/div/div[2]/div[3]/div[2]/div[2]/button[2]")).click();// NEXT
+
+        driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-placement-quiz/div/div[2]/div[3]/div[2]/div[1]/div/div/p[2]/a")).click();//1-2 Years
+
+        driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-placement-quiz/div/div[2]/div[3]/div[2]/div[2]/button[2]")).click();// NEXT
+        driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-placement-quiz-results/div/div[2]/div[3]/div[2]/button")).click();// SHOW ME THE TIPS
+        driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-success-tips/div/div[2]/div[4]/div[2]/label/input")).click();//Got It!
+        driver.findElement(By.xpath("/html/body/lp3-app/lp3-activation/lp3-success-tips/div/div[2]/div[4]/div[2]/button")).click();//START YOUR COURSE NOW
+
+        Boolean popUpBolivares = false;
+
+
+        /*
+        try {
+
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(((By.xpath("//*[@id=\"angular-body\"]/div[4]/div/div[1]/div/div[3]/div[3]"))))); // POPUP Bolivares
+
+               popUpBolivares = true;
+
+        }
+        catch (InterruptedException ex) {
+            popUpBolivares=false;}
+
+*/
+
+
+        Assert.assertTrue(driver.findElement(By.id("level-progress")).isDisplayed());
+
 
 
 
@@ -269,6 +330,21 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     }
 
+    @Test(priority = 6)
+    public void loginToPlatform() {
 
+        setCaseID(22222);
+        setCaseComment("Loggin in to OE Platform");
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+
+        driver.get("http://learningplatform.stg.openenglish.com/");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-email")));
+        driver.findElement(By.id("login-email")).sendKeys(emailRandom);
+        driver.findElement(By.id("login-password")).sendKeys("morpheus110");
+        driver.findElement(By.id("login-password")).sendKeys(Keys.RETURN);
+        Assert.assertTrue(driver.findElement(By.id("level-progress")).isDisplayed());
+
+
+    }
 }
 

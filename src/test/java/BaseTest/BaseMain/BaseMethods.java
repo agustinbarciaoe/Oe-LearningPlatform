@@ -39,7 +39,8 @@ public class BaseMethods  {
 
     public static EmailUtils emailUtils;
 
-    @BeforeClass
+    /*@BeforeClass
+
     public static void connectToEmail() {
         try {
             emailUtils = new EmailUtils("tester.openenglish@gmail.com", "trinity110", "smtp.gmail.com", EmailUtils.EmailFolder.INBOX);
@@ -48,6 +49,7 @@ public class BaseMethods  {
             Assert.fail(e.getMessage());
         }
     }
+*/
 
     @BeforeClass
     public static void initialization(){
@@ -87,7 +89,7 @@ public class BaseMethods  {
 
         driver = new FirefoxDriver();
 
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         //driver.get("https://www.stg.openenglish.com/");
     }
 
@@ -161,6 +163,7 @@ public class BaseMethods  {
     public static boolean verifyMailSubject(String userName, String password, String message) {
         Folder folder = null;
         Store store = null;
+        boolean found = false;
         System.out.println("***READING MAILBOX...");
         try {
             Properties props = new Properties();
@@ -189,10 +192,11 @@ public class BaseMethods  {
                 //---- This is what you want to do------
                 if (strMailSubject.contains(message)) {
                     System.out.println(strMailSubject);
+                    found = true;
                     break;
                 }
             }
-            return true;
+            return found;
         } catch (MessagingException messagingException) {
             messagingException.printStackTrace();
         } catch (IOException ioException) {
@@ -215,12 +219,13 @@ public class BaseMethods  {
                 }
             }
         }
-        return false;
+        return found;
     }
 
     public  boolean verifyMailContent(String userName, String password, String message1, String message2) {
         Folder folder = null;
         Store store = null;
+        boolean found = false;
         System.out.println("***READING MAILBOX...");
         try {
             Properties props = new Properties();
@@ -244,16 +249,18 @@ public class BaseMethods  {
                 Object content = msg.getContent();
                 // Casting objects of mail subject and body into String
                 strMailBody = (String) getText(msg);
-
+                strMailSubject = (String) subject;
+                System.out.println("Subject del mail evaluado: "+strMailSubject);
 
                 //System.out.println("Body del mail evaluado: "+strMailBody);
                 //---- This is what you want to do------
                 if (strMailBody.contains(message1)&&strMailSubject.contains(message2)) {
                     System.out.println("Mail con Subject: "+message2+" y contenido: "+message1+" encontrado!");
+                    found = true;
                     break;
                 }
             }
-            return true;
+            return found;
         } catch (MessagingException messagingException) {
             messagingException.printStackTrace();
         } catch (IOException ioException) {
@@ -276,7 +283,7 @@ public class BaseMethods  {
                 }
             }
         }
-        return false;
+        return found;
     }
 
     private boolean textIsHtml = false;
@@ -337,6 +344,7 @@ public class BaseMethods  {
     public String getActivationLink(String userName, String password, String message, String titulo) {
         Folder folder = null;
         Store store = null;
+        String retorno = "No encontrado";
         System.out.println("***READING MAILBOX...");
         try {
             Properties props = new Properties();
@@ -366,23 +374,24 @@ public class BaseMethods  {
                 //strMailBody = (String) content;
                 strMailBody = (String) getText(msg);
                 System.out.println("Subject del mail evaluado: "+strMailSubject);
+                System.out.println("Titulo buscado: "+titulo);
+                System.out.println("Mensaje buscado: "+ message);
+                //System.out.println("Body: "+ strMailBody);
                 //---- This is what you want to do------
                 if (strMailSubject.contains(titulo)&&strMailBody.contains(message)) {
                     System.out.println(strMailSubject);
+
+                    int indexInicio = strMailBody.indexOf("https://lp3-ui.stg.openenglish.com/activation/");
+                    //int indexFin = strMailBody.indexOf("target");
+                    System.out.println("IndexInicio: "+indexInicio);
+                    //System.out.println("IndexFin: "+indexFin);
+                    retorno = strMailBody.substring(indexInicio,indexInicio+107);
+
                     break;
                 }
             }
 
-            ;
-
-            int indexInicio = strMailBody.indexOf("https://lp3-ui.stg.openenglish.com/activation/");
-            //int indexFin = strMailBody.indexOf("target");
-            System.out.println("IndexInicio: "+indexInicio);
-            //System.out.println("IndexFin: "+indexFin);
-            return strMailBody.substring(indexInicio,indexInicio+107);
-
-
-            //return true;
+            return retorno;
 
         } catch (MessagingException messagingException) {
             messagingException.printStackTrace();
