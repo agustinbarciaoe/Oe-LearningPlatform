@@ -29,6 +29,9 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     public String emailRandom;
     public static String nameRandom = "NAME" + randomEmail();
+
+
+
     //  WebDriverWait wait = new WebDriverWait(driver, 15);
 
 
@@ -36,7 +39,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     public void leadSubmission() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
-        setCaseID(44787);
+        setCaseID(46885);
         setCaseComment("Happy path lead submission");
 
         driver.get("https://www.stg.openenglish.com/");
@@ -86,7 +89,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     @Test(priority = 2)
     public void openSalesTool() throws InterruptedException {
-        setCaseID(11111);
+        setCaseID(47307);
         setCaseComment("Loggin in to SF and confirm license purchase");
         WebDriverWait wait = new WebDriverWait(driver, 60);
 
@@ -201,13 +204,13 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     @Test(priority = 3)
     public void verifyRegistrationEmail() throws InterruptedException {
-        setCaseID(44787);
+        setCaseID(46886);
         setCaseComment("Verifying Thank You email arrived");
 
         System.out.println(nameRandom);
 
         try {
-            Thread.sleep(50000);
+            Thread.sleep(10000);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -219,7 +222,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     @Test(priority = 4)
     public void verifyPurchaseEmail() throws InterruptedException {
-        setCaseID(44789);
+        setCaseID(47308);
         setCaseComment("Verifying Purchase confirmation email arrived");
         System.out.println(nameRandom);
 
@@ -248,7 +251,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     @Test (priority = 5)
     public void ActivateLicense()  throws InterruptedException {
-        setCaseID(33333);
+        setCaseID(47309);
         setCaseComment("Activating license using link from email");
 
         //nameRandom = "NAMEMDNSKE";
@@ -330,21 +333,6 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     }
 
-    @Test(priority = 6)
-    public void loginToPlatform() {
 
-        setCaseID(22222);
-        setCaseComment("Loggin in to OE Platform");
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-
-        driver.get("http://learningplatform.stg.openenglish.com/");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-email")));
-        driver.findElement(By.id("login-email")).sendKeys(emailRandom);
-        driver.findElement(By.id("login-password")).sendKeys("morpheus110");
-        driver.findElement(By.id("login-password")).sendKeys(Keys.RETURN);
-        Assert.assertTrue(driver.findElement(By.id("level-progress")).isDisplayed());
-
-
-    }
 }
 

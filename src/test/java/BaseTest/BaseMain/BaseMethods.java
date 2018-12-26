@@ -34,6 +34,7 @@ public class BaseMethods  {
     public static String ckName = new String();
     public static String ckValue = new String();
     public static String caseComment = new String();
+    public static String runID = System.getProperty("runID");
 
     //Inicializacion del web driver
 
@@ -137,6 +138,7 @@ public class BaseMethods  {
         data.put("custom_environment", new Integer(1));
         data.put("comment", caseComment);
         JSONObject r = (JSONObject) client.sendPost("add_result/"+caseID, data);
+        System.out.println("Case ID: "+caseID+" PASSED");
 
     }
 
@@ -157,6 +159,7 @@ public class BaseMethods  {
         data.put("custom_environment", new Integer(1));
         data.put("comment", "Error en:" + ' ' + sStackTrace);
         JSONObject r = (JSONObject) client.sendPost("add_result/"+caseID, data);
+        System.out.println("Case ID: "+caseID+" FAILED");
 
     }
 
