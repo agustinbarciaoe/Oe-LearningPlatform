@@ -106,7 +106,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         driver.findElement(By.id("phSearchInput")).sendKeys(nameRandom);
         TimeUnit.SECONDS.sleep(5);
         try {
-            Thread.sleep(10000);
+            Thread.sleep(15000);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
