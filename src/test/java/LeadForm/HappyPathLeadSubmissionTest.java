@@ -39,7 +39,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     public void leadSubmission() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
-        setCaseID(46885);
+        setCaseID(39742);
         setCaseComment("Happy path lead submission");
 
         driver.get("https://www.stg.openenglish.com/");
@@ -89,7 +89,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     @Test(priority = 2)
     public void openSalesTool() throws InterruptedException {
-        setCaseID(47307);
+        setCaseID(41158);
         setCaseComment("Loggin in to SF and confirm license purchase");
         WebDriverWait wait = new WebDriverWait(driver, 60);
 
@@ -204,7 +204,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     @Test(priority = 3)
     public void verifyRegistrationEmail() throws InterruptedException {
-        setCaseID(46886);
+        setCaseID(39743);
         setCaseComment("Verifying Thank You email arrived");
 
         System.out.println(nameRandom);
@@ -222,7 +222,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     @Test(priority = 4)
     public void verifyPurchaseEmail() throws InterruptedException {
-        setCaseID(47308);
+        setCaseID(41159);
         setCaseComment("Verifying Purchase confirmation email arrived");
         System.out.println(nameRandom);
 
@@ -251,7 +251,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     @Test (priority = 5)
     public void ActivateLicense()  throws InterruptedException {
-        setCaseID(47309);
+        setCaseID(41160);
         setCaseComment("Activating license using link from email");
 
         //nameRandom = "NAMEMDNSKE";

@@ -91,6 +91,8 @@ public class BaseMethods  {
         driver = new FirefoxDriver();
 
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+
+        System.out.println(runID);
         //driver.get("https://www.stg.openenglish.com/");
     }
 
@@ -104,6 +106,7 @@ public class BaseMethods  {
         }
     public static void setLangCookieName(String name){ckName = name;}
     public static void setLangCookieValue(String value){ckValue = value;}
+
 
 
     // Random email
