@@ -92,7 +92,8 @@ public class BaseMethods  {
 
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
-        System.out.println(runID);
+        System.out.println("El Run ID recibido es: "+runID);
+        //runID="307";
         //driver.get("https://www.stg.openenglish.com/");
     }
 
@@ -140,7 +141,7 @@ public class BaseMethods  {
         data.put("status_id", new Integer(1));
         data.put("custom_environment", new Integer(1));
         data.put("comment", caseComment);
-        JSONObject r = (JSONObject) client.sendPost("add_result/"+caseID, data);
+        JSONObject r = (JSONObject) client.sendPost("add_result_for_case/"+runID+"/"+caseID, data);
         System.out.println("Case ID: "+caseID+" PASSED");
 
     }
@@ -161,7 +162,7 @@ public class BaseMethods  {
         data.put("status_id", new Integer(5));
         data.put("custom_environment", new Integer(1));
         data.put("comment", "Error en:" + ' ' + sStackTrace);
-        JSONObject r = (JSONObject) client.sendPost("add_result/"+caseID, data);
+        JSONObject r = (JSONObject) client.sendPost("add_result_for_case/"+runID+"/"+caseID, data);
         System.out.println("Case ID: "+caseID+" FAILED");
 
     }
