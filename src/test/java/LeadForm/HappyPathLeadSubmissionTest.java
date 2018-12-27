@@ -219,7 +219,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     }
 
-    @Test(priority = 4)
+    @Test(priority = 5)
     public void verifyPurchaseEmail() throws InterruptedException {
         setCaseID(41159);
         setCaseComment("Verifying Purchase confirmation email arrived");
@@ -248,7 +248,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 */
 
 
-    @Test (priority = 5)
+    @Test (priority = 4)
     public void ActivateLicense()  throws InterruptedException {
         setCaseID(41160);
         setCaseComment("Activating license using link from email");
