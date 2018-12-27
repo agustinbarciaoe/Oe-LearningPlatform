@@ -1,3 +1,4 @@
+/*
 package LeadForm;
 
 import BaseTest.BaseMain.BaseMethods;
@@ -13,7 +14,7 @@ import static org.testng.Assert.assertTrue;
 @Listeners(CustomTestListener.class)
 public class AssertRequeridosTest extends BaseMethods {
 
-/*
+
     @BeforeClass
     public void setUp() throws Exception {
 
@@ -26,7 +27,7 @@ public class AssertRequeridosTest extends BaseMethods {
       //  driver.close();
       //  driver.quit();
     }
-    */
+
 
     @Test
     public void leadformtitle(){
@@ -105,3 +106,4 @@ public class AssertRequeridosTest extends BaseMethods {
         );
     }
 }
+*/
