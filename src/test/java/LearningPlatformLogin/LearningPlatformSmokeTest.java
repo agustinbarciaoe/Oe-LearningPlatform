@@ -1,3 +1,4 @@
+/*
 package LearningPlatformLogin;
 
 import BaseTest.BaseMain.BaseMethods;
@@ -79,3 +80,5 @@ public class LearningPlatformSmokeTest extends BaseMethods {
     }
 
 }
+
+*/

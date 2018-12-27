@@ -1,3 +1,4 @@
+/*
 package LearningPlatformLogin;
 
 import BaseTest.BaseMain.BaseMethods;
@@ -71,7 +72,7 @@ public class LearningPlatformLoginTest extends BaseMethods {
 
 
 
-
+*/
 
 
 
