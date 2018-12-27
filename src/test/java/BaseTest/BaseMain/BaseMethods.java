@@ -34,7 +34,7 @@ public class BaseMethods  {
     public static String ckName = new String();
     public static String ckValue = new String();
     public static String caseComment = new String();
-    public static String runID = System.getProperty("runID");
+    public static String runID = System.getProperty("RunId");
 
     //Inicializacion del web driver
 
