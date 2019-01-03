@@ -33,6 +33,8 @@ public class BaseMethods  {
     public static String ckValue = new String();
     public static String caseComment = new String();
     public static String runID = System.getProperty("RunId");
+   //public static String runID = "314";
+    public ArrayList<String> caseIDs = new ArrayList<String>();
 
     //Inicializacion del web driver
 
@@ -95,7 +97,30 @@ public class BaseMethods  {
         //driver.get("https://www.stg.openenglish.com/");
     }
 
+    @BeforeClass
+    public void getTestCases() throws IOException, APIException {
 
+        APIClient client = new APIClient("https://openeducation.testrail.net/");
+        client.setUser("agustin.barcia@openenglish.com");
+        client.setPassword("0232049021Ajb!");
+
+        // JSONObject r = (JSONObject) client.sendPost("add_result_for_case/"+runID+"/"+caseID, data);
+        JSONArray jArray  = (JSONArray) client.sendGet("get_tests/"+runID);
+
+
+
+        for(int i=0;i<jArray.size();i++){
+            JSONObject json_obj = (JSONObject) jArray.get(i);
+            //String cID = (Long) json_obj.get("case_id");
+            caseIDs.add( json_obj.get("case_id").toString());
+            //System.out.println(json_obj.get("case_id"));
+
+        }
+
+        //System.out.println(jArray .toJSONString());
+        System.out.println(caseIDs);
+
+    }
 
 
     //setter
