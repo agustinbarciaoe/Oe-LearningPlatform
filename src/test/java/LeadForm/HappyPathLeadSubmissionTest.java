@@ -2,6 +2,10 @@ package LeadForm;
 
 import BaseTest.BaseMain.BaseMethods;
 import BaseTest.BaseMain.CustomTestListener;
+import com.gurok.APIClient;
+import com.gurok.APIException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -17,8 +21,10 @@ import org.testng.annotations.Test;
 import BaseTest.BaseMain.EmailUtils;
 
 import javax.mail.Message;
+import java.io.IOException;
 import java.sql.Driver;
 import java.time.Instant;
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
@@ -28,11 +34,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     public String emailRandom;
     public static String nameRandom = "NAME" + randomEmail();
-
-
-
     //  WebDriverWait wait = new WebDriverWait(driver, 15);
-
 
     @Test(priority = 1)
     public void leadSubmission() throws InterruptedException {
@@ -331,6 +333,14 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
         //assertTrue((verifyMailContent("pepe@mailsac.com", null , "Hello " + nameRandom, "We are writing to confirm the purchase of your course")));
 
     }
+
+
+
+
+        //List<String> testIDs = new ArrayList<String >();
+
+
+        // return runID;
 
 
 }
