@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import BaseTest.BaseMain.EmailUtils;
@@ -39,7 +40,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     @Test(priority = 1)
     public void leadSubmission() throws InterruptedException {
 
-        if (caseIDs.contains("39742")) {
+        if (!caseIDs.contains("39742")) throw new SkipException("Skipping this testCase: 39742");
 
             WebDriverWait wait = new WebDriverWait(driver, 30);
 
@@ -89,12 +90,12 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             assertTrue(driver.findElement(By.id("thankyou-hero-title")).getText().contains("Gracias por dar el primer paso para lograr tu objetivo"));
             //driver.wait(10);
             // verifyMail(emailRandom,"trinity110","cómo funciona");
-        } else { System.out.println("39742 no incluido en el Test Run");}
+
     }
 
     @Test(priority = 2)
     public void openSalesTool() throws InterruptedException {
-        if (caseIDs.contains("41158")) {
+        if (!caseIDs.contains("41158")) throw new SkipException("Skipping this testCase: 41158");
             setCaseID(41158);
             setCaseComment("Loggin in to SF and confirm license purchase");
             WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -204,14 +205,14 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             driver.findElement(By.name("j_id0:stco:j_id217:mainForm:j_id384")).click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("zuora__sync_data_from_zbilling")));
             driver.findElement(By.name("zuora__sync_data_from_zbilling")).click();
-        } else { System.out.println("41158 no incluido en el Test Run");}
+
 
     }
 
     @Test(priority = 3)
     public void verifyRegistrationEmail() throws InterruptedException {
 
-        if (caseIDs.contains("39743")) {
+        if (!caseIDs.contains("39743")) throw new SkipException("Skipping this testCase: 39743");
             setCaseID(39743);
             setCaseComment("Verifying Thank You email arrived");
 
@@ -226,12 +227,12 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             assertTrue((verifyMailSubject("tester.openenglish@gmail.com", "trinity110", nameRandom + ", cómo funciona Open English")));
             //assertTrue((verifyMailSubject("pepe@mailsac.com", null, nameRandom)));
 
-        } else { System.out.println("39743 no incluido en el Test Run");}
+
     }
 
     @Test(priority = 5)
     public void verifyPurchaseEmail() throws InterruptedException {
-        if (caseIDs.contains("41159")) {
+        if (!caseIDs.contains("41159")) throw new SkipException("Skipping this testCase: 41159");
             setCaseID(41159);
             setCaseComment("Verifying Purchase confirmation email arrived");
             System.out.println(nameRandom);
@@ -244,7 +245,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
             assertTrue((verifyMailContent("tester.openenglish@gmail.com", "trinity110", "Hello " + nameRandom, "Congratulations on your purchase of Open English!")));
             //assertTrue((verifyMailContent("pepe@mailsac.com", null , "Hello " + nameRandom, "We are writing to confirm the purchase of your course")));
-        } else { System.out.println("41159 no incluido en el Test Run");}
+
 
     /*
     @Test(priority = 7)
@@ -264,7 +265,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     @Test (priority = 4)
     public void ActivateLicense()  throws InterruptedException {
-        if (caseIDs.contains("41160")) {
+        if (!caseIDs.contains("41160")) throw new SkipException("Skipping this testCase: 39742");
             setCaseID(41160);
             setCaseComment("Activating license using link from email");
 
@@ -349,7 +350,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             //assertTrue((verifyMailContent("tester.openenglish@gmail.com", "trinity110", "Hello " + nameRandom, "We are writing to confirm the purchase of your course")));
             //assertTrue((verifyMailContent("pepe@mailsac.com", null , "Hello " + nameRandom, "We are writing to confirm the purchase of your course")));
 
-        } else { System.out.println("41160 no incluido en el Test Run");}
+
 
     }
 

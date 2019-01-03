@@ -33,7 +33,7 @@ public class BaseMethods  {
     public static String ckValue = new String();
     public static String caseComment = new String();
     public static String runID = System.getProperty("RunId");
-   //public static String runID = "314";
+    //public static String runID = "317";
     public ArrayList<String> caseIDs = new ArrayList<String>();
 
     //Inicializacion del web driver
