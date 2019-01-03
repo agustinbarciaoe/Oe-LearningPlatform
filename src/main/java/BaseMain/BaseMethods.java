@@ -1,4 +1,4 @@
-package BaseTest.BaseMain;
+package BaseMain;
 
 import com.gurok.APIClient;
 import com.gurok.APIException;
@@ -11,7 +11,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -32,8 +31,8 @@ public class BaseMethods  {
     public static String ckName = new String();
     public static String ckValue = new String();
     public static String caseComment = new String();
-    public static String runID = System.getProperty("RunId");
-    //public static String runID = "317";
+    //public static String runID = System.getProperty("RunId");
+    public static String runID = "317";
     public ArrayList<String> caseIDs = new ArrayList<String>();
 
     //Inicializacion del web driver

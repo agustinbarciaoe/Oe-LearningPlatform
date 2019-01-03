@@ -1,17 +1,11 @@
 package LeadForm;
 
-import BaseTest.BaseMain.BaseMethods;
-import BaseTest.BaseMain.CustomTestListener;
-import com.gurok.APIClient;
-import com.gurok.APIException;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import BaseMain.BaseMethods;
+import BaseMain.CustomTestListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,13 +13,7 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import BaseTest.BaseMain.EmailUtils;
 
-import javax.mail.Message;
-import java.io.IOException;
-import java.sql.Driver;
-import java.time.Instant;
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;

@@ -1,8 +1,8 @@
 /*
 package LeadForm;
 
-import BaseTest.BaseMain.BaseMethods;
-import BaseTest.BaseMain.CustomTestListener;
+import BaseMethods;
+import CustomTestListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Listeners;

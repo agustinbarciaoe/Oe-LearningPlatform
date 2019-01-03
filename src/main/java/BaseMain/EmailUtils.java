@@ -1,4 +1,4 @@
-package BaseTest.BaseMain;
+package BaseMain;
 
 import java.io.BufferedReader;
 import java.io.File;

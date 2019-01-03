@@ -1,4 +1,4 @@
-package BaseTest.BaseMain;
+package BaseMain;
 
 import com.gurok.APIException;
 import org.testng.ITestContext;

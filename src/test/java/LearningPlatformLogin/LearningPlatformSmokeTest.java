@@ -1,8 +1,8 @@
 /*
 package LearningPlatformLogin;
 
-import BaseTest.BaseMain.BaseMethods;
-import BaseTest.BaseMain.CustomTestListener;
+import BaseMethods;
+import CustomTestListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
