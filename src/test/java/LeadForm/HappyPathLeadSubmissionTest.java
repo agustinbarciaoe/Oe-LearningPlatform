@@ -25,7 +25,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     public static String nameRandom = "NAME" + randomEmail();
     //  WebDriverWait wait = new WebDriverWait(driver, 15);
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "Create Lead from OE website")
     public void leadSubmission() throws InterruptedException {
 
         if (!caseIDs.contains("39742")) throw new SkipException("Skipping this testCase: 39742");
@@ -81,7 +81,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, description = "Login to SF and convert Lead into Purchaser")
     public void openSalesTool() throws InterruptedException {
         if (!caseIDs.contains("41158")) throw new SkipException("Skipping this testCase: 41158");
             setCaseID(41158);
@@ -197,7 +197,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, description = "Verify registration email arrived successfully")
     public void verifyRegistrationEmail() throws InterruptedException {
 
         if (!caseIDs.contains("39743")) throw new SkipException("Skipping this testCase: 39743");
@@ -218,7 +218,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5, description = "Verify Purchase email arrived successfully")
     public void verifyPurchaseEmail() throws InterruptedException {
         if (!caseIDs.contains("41159")) throw new SkipException("Skipping this testCase: 41159");
             setCaseID(41159);
@@ -251,7 +251,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 */
     }
 
-    @Test (priority = 4)
+    @Test (priority = 4, description = "Verify activation email arrived successfully and uses activation link")
     public void ActivateLicense()  throws InterruptedException {
         if (!caseIDs.contains("41160")) throw new SkipException("Skipping this testCase: 39742");
             setCaseID(41160);
