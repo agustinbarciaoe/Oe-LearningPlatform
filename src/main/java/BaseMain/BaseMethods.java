@@ -4,22 +4,26 @@ import com.gurok.APIClient;
 import com.gurok.APIException;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 import javax.mail.*;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.io.IOException;
+
 
 public class BaseMethods  {
 
@@ -31,13 +35,14 @@ public class BaseMethods  {
     public static String ckName = new String();
     public static String ckValue = new String();
     public static String caseComment = new String();
-    public static String runID = System.getProperty("RunId");
-    //public static String runID = "317";
+    //public static String runID = System.getProperty("RunId");
+    public static String runID = "319";
     public ArrayList<String> caseIDs = new ArrayList<String>();
+    public String urlScreenshot;
 
     //Inicializacion del web driver
 
-    public static EmailUtils emailUtils;
+    //public static EmailUtils emailUtils;
 
     /*@BeforeClass
 
@@ -50,6 +55,8 @@ public class BaseMethods  {
         }
     }
 */
+
+
 
     @BeforeClass
     public static void initialization(){
@@ -173,7 +180,35 @@ public class BaseMethods  {
 
     //post a test rail para un test failed
 
-    public void testFailed() throws IOException, APIException {
+    public void testFailed(ITestResult result) throws IOException, APIException {
+
+        try
+        {
+// Create refernce of TakesScreenshot
+            TakesScreenshot ts=(TakesScreenshot)driver;
+
+// Call method to capture screenshot
+            File source=ts.getScreenshotAs(OutputType.FILE);
+
+// Copy files to specific location here it will save all screenshot in our project home directory and
+// result.getName() will return name of test case so that screenshot name will be same
+            //FileUtils.copyFile(source, new File("Screenshots/"+runID+"-"+result.getName()+".png"));
+
+            System.out.println("Screenshot taken");
+            String fileName ="public_html/Screenshots/"+runID+"-"+result.getName()+".png";
+            urlScreenshot = "https://testrailtrigger.000webhostapp.com/Screenshots/"+runID+"-"+result.getName()+".png";
+
+            uploadFile(source,fileName);
+
+
+
+
+        }
+        catch (Exception e)
+        {
+
+            System.out.println("Exception while taking screenshot "+e.getMessage());
+        }
 
         APIClient client = new APIClient("https://openeducation.testrail.net/");
         client.setUser("agustin.barcia@openenglish.com");
@@ -186,7 +221,8 @@ public class BaseMethods  {
         Map data = new HashMap();
         data.put("status_id", new Integer(5));
         data.put("custom_environment", new Integer(1));
-        data.put("comment", "Error en:" + ' ' + sStackTrace);
+        data.put("comment", "Error en:" + ' ' + sStackTrace+"        " +
+                "Screenshot: "+urlScreenshot);
         JSONObject r = (JSONObject) client.sendPost("add_result_for_case/"+runID+"/"+caseID, data);
         System.out.println("Case ID: "+caseID+" FAILED");
 
@@ -449,6 +485,99 @@ public class BaseMethods  {
         }
         return "No encontrado";
     }
+
+    public void uploadFile (File fileToUpload, String uploadName) {
+        String server = "files.000webhost.com";
+        String user = "testrailtrigger";
+        String pass = "123456";
+
+        FTPClient ftpClient = new FTPClient();
+
+        try {
+
+            ftpClient.connect(server);
+            System.out.println("Connected to " + server + ".");
+            System.out.print(ftpClient.getReplyString());
+
+            ftpClient.login(user, pass);
+            ftpClient.enterLocalPassiveMode();
+
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+            // uploads first file using an InputStream
+            //File firstLocalFile = new File("/tmp/PAR.TXT");
+
+            //String firstRemoteFile = "./Screenshots/"+runID+"/"+result.getName()+".png";
+            InputStream inputStream = new FileInputStream(fileToUpload);
+
+            System.out.println("Start uploading file");
+            boolean done = ftpClient.storeFile(uploadName, inputStream);
+            System.out.println("done:" + done);
+
+            inputStream.close();
+            if (done) {
+                System.out.println("The file is uploaded successfully.");
+            }
+
+
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (ftpClient.isConnected()) {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+    }
+
+/*
+    @AfterMethod
+    public void tearDown(ITestResult result)
+    {
+
+// Here will compare if test is failing then only it will enter into if condition
+        if(ITestResult.FAILURE==result.getStatus())
+        {
+
+
+            try
+            {
+// Create refernce of TakesScreenshot
+                TakesScreenshot ts=(TakesScreenshot)driver;
+
+// Call method to capture screenshot
+                File source=ts.getScreenshotAs(OutputType.FILE);
+
+// Copy files to specific location here it will save all screenshot in our project home directory and
+// result.getName() will return name of test case so that screenshot name will be same
+                //FileUtils.copyFile(source, new File("Screenshots/"+runID+"-"+result.getName()+".png"));
+                System.out.println("Screenshot taken");
+                String fileName ="public_html/Screenshots/"+runID+"-"+result.getName()+".png";
+                urlScreenshot = "https://testrailtrigger.000webhostapp.com/Screenshots/"+runID+"-"+result.getName()+".png";
+
+                uploadFile(source,fileName);
+
+
+
+
+            }
+            catch (Exception e)
+            {
+
+                System.out.println("Exception while taking screenshot "+e.getMessage());
+            }
+
+
+        }
+
+    }
+*/
 
     @AfterClass
     public void tearDownDriver() {

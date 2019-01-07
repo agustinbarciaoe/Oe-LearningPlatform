@@ -30,7 +30,7 @@ public class CustomTestListener<context> extends BaseMethods implements ITestLis
     public void onTestFailure(ITestResult result) {
 
             try {
-                testFailed();
+                testFailed(result);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (APIException e) {

@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
 import org.testng.SkipException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -35,7 +36,8 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             setCaseID(39742);
             setCaseComment("Happy path lead submission");
 
-            driver.get("https://www.stg.openenglish.com/");
+            driver.get("https://www.stg.openenglish.com");
+           /*
             if (driver.findElement(By.id("cn-accept-cookie")).isDisplayed())
                 try {
                     driver.findElement(By.id("cn-accept-cookie")).click();
@@ -44,7 +46,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
                     }
                 }
-
+            */
 
             driver.findElement(By.id("firstname-input")).sendKeys(nameRandom);
             driver.findElement(By.id("lastname-input")).sendKeys("TestName");
