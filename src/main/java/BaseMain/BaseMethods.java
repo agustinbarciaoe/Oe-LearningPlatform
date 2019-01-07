@@ -36,7 +36,7 @@ public class BaseMethods  {
     public static String ckValue = new String();
     public static String caseComment = new String();
     //public static String runID = System.getProperty("RunId");
-    public static String runID = "319";
+    public static String runID = "320";
     public ArrayList<String> caseIDs = new ArrayList<String>();
     public String urlScreenshot;
 

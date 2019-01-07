@@ -90,7 +90,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             setCaseComment("Loggin in to SF and confirm license purchase");
             WebDriverWait wait = new WebDriverWait(driver, 60);
 
-            driver.get("https://openeducation--stg.cs77.my.salesforce.com/");
+            driver.get("https://openeducation--stg.cs77.my.salesforce.com.rpg/");
             driver.findElement(By.id("username")).sendKeys("martin.tellechea@openenglish.com.stg");
             driver.findElement(By.id("password")).sendKeys("trinity112");
             driver.findElement(By.id("Login")).click();

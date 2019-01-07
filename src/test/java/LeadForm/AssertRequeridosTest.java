@@ -1,10 +1,11 @@
-/*
+
 package LeadForm;
 
-import BaseMethods;
-import CustomTestListener;
+import BaseMain.BaseMethods;
+import BaseMain.CustomTestListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.SkipException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -15,47 +16,44 @@ import static org.testng.Assert.assertTrue;
 public class AssertRequeridosTest extends BaseMethods {
 
 
-    @BeforeClass
-    public void setUp() throws Exception {
-
-        inizialitation();
-
-    }
-
-    @AfterClass
-    public void tearDown() throws Exception {
-      //  driver.close();
-      //  driver.quit();
-    }
 
 
     @Test
-    public void leadformtitle(){
+    public void leadformtitle() throws InterruptedException{
+        String caseID = "39729";
+        if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
-        setCaseID(46858);
+        setCaseID(39729);
         setCaseComment("Verificando que el titulo del leadform sea correcto");
-        //driver.get("https://www.stg.openenglish.com/");
+        driver.get("https://www.stg.openenglish.com/");
         assertEquals(driver.findElement(By.id("leadform-title")).getText(), "Empieza a Aprender Inglés");
 
     }
 
+    /*
     @Test
     public void requerido(){
+        String caseID = "39730";
+        if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
-        setCaseID(46859);
+        setCaseID(39730);
         setCaseComment("Verificando que el div 'required' sea mostrado");
         //driver.get("https://www.stg.openenglish.com/");
         //driver.findElement(By.id("required-div"));
         assertTrue(driver.findElement(By.id("required-div")).getText().matches("^[\\s\\S]* Requerido$"));
 
     }
+*/
 
     @Test
     public void nombreRequerido(){
 
-        setCaseID(46860);
+        String caseID = "39731";
+        if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
+
+        setCaseID(39731);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible!!!!");
-       //driver.get("https://www.stg.openenglish.com/");
+       driver.get("https://www.stg.openenglish.com/");
         //driver.findElement(By.id("firstname-input"));
         assertTrue(driver.findElement(By.id("firstname-input")).getAttribute("placeholder").contains("Nombre"));
     }
@@ -63,18 +61,24 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void apellidoRequerido(){
 
-        setCaseID(46861);
+        String caseID = "39732";
+        if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
+
+        setCaseID(39732);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
-        //driver.get("https://www.stg.openenglish.com/");
+        driver.get("https://www.stg.openenglish.com/");
         //driver.findElement(By.id("lastname-input"));
         assertTrue(driver.findElement(By.id("lastname-input")).getAttribute("placeholder").contains("Apellido"));
     }
     @Test
     public void correoRequerido(){
 
-        setCaseID(46862);
+        String caseID = "39733";
+        if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
+
+        setCaseID(39733);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
-        //driver.get("https://www.stg.openenglish.com/");
+        driver.get("https://www.stg.openenglish.com/");
         //driver.findElement(By.id("emailaddress-input"));
         assertTrue(driver.findElement(By.id("emailaddress-input")).getAttribute("placeholder").contains("Correo"));
     }
@@ -82,10 +86,13 @@ public class AssertRequeridosTest extends BaseMethods {
     @Test
     public void regionRequerido(){
 
-        setCaseID(46863);
+        String caseID = "39734";
+        if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
+
+        setCaseID(39734);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
 
-        //driver.get("https://www.stg.openenglish.com/");
+        driver.get("https://www.stg.openenglish.com/");
         Select regionDropdown= new Select(driver.findElement(By.id("state-select")));
         assertTrue(regionDropdown.getFirstSelectedOption().getText().contains("Región"));
 
@@ -93,9 +100,13 @@ public class AssertRequeridosTest extends BaseMethods {
 
     @Test
     public void verifyMandatoryFields() {
-        setCaseID(46862);
-        setCaseComment("Verificando que todos los mensajes de Requerido se visualicen");
+        String caseID = "39730";
+        if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
+        setCaseID(39730);
+        setCaseComment("Verifying all Required messages are shown");
+
+        driver.get("https://www.stg.openenglish.com/");
         driver.findElement(By.id("submit-button")).click();
         assertTrue(
                 driver.findElement(By.xpath("//*[@id=\"leadForm\"]/div[1]/div[2]/div/span")).isDisplayed()&&
@@ -106,4 +117,3 @@ public class AssertRequeridosTest extends BaseMethods {
         );
     }
 }
-*/

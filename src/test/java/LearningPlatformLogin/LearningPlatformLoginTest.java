@@ -1,11 +1,12 @@
-/*
+
 package LearningPlatformLogin;
 
-import BaseMethods;
-import CustomTestListener;
+import BaseMain.BaseMethods;
+import BaseMain.CustomTestListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -16,8 +17,10 @@ public class LearningPlatformLoginTest extends BaseMethods {
 
     @Test
     public void assertEnLoginForm(){
+        String caseID = "41201";
+        if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
-        setCaseID(44791);
+        setCaseID(41201);
         setCaseComment("Testing cookie values");
         setLangCookieName("NLS");
         setLangCookieValue("en");
@@ -39,8 +42,10 @@ public class LearningPlatformLoginTest extends BaseMethods {
         }
     @Test
     public void assertEsLoginForm(){
+        String caseID = "41202";
+        if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
-        setCaseID(44791);
+        setCaseID(41202);
         setCaseComment("Testing cookie values");
         setLangCookieName("NLS");
         setLangCookieValue("es");
@@ -72,7 +77,7 @@ public class LearningPlatformLoginTest extends BaseMethods {
 
 
 
-*/
+
 
 
 
