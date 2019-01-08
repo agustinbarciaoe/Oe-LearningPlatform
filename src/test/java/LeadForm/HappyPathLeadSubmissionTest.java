@@ -26,8 +26,8 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     public static String nameRandom = "NAME" + randomEmail();
     //  WebDriverWait wait = new WebDriverWait(driver, 15);
 
-    @Test(priority = 1, description = "Create Lead from OE website")
-    public void leadSubmission() throws InterruptedException {
+    @Test
+    public void A_leadSubmission() throws InterruptedException {
 
         if (!caseIDs.contains("39742")) throw new SkipException("Skipping this testCase: 39742");
 
@@ -76,6 +76,8 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             //     driver.findElement(By.id("cn-accept-cookie")).click();
             TimeUnit.SECONDS.sleep(3);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit-button")));
+        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.id("submit-button")));
+        ((JavascriptExecutor) driver).executeScript("javascript:window.scrollBy(250, 350)");
             driver.findElement(By.id("submit-button")).click();
             assertTrue(driver.findElement(By.id("thankyou-hero-title")).getText().contains("Gracias por dar el primer paso para lograr tu objetivo"));
             //driver.wait(10);
@@ -83,8 +85,8 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     }
 
-    @Test(priority = 2, description = "Login to SF and convert Lead into Purchaser")
-    public void openSalesTool() throws InterruptedException {
+    @Test
+    public void B_openSalesTool() throws InterruptedException {
         if (!caseIDs.contains("41158")) throw new SkipException("Skipping this testCase: 41158");
             setCaseID(41158);
             setCaseComment("Loggin in to SF and confirm license purchase");
@@ -199,8 +201,8 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     }
 
-    @Test(priority = 3, description = "Verify registration email arrived successfully")
-    public void verifyRegistrationEmail() throws InterruptedException {
+    @Test
+    public void C_verifyRegistrationEmail() throws InterruptedException {
 
         if (!caseIDs.contains("39743")) throw new SkipException("Skipping this testCase: 39743");
             setCaseID(39743);
@@ -220,8 +222,8 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     }
 
-    @Test(priority = 5, description = "Verify Purchase email arrived successfully")
-    public void verifyPurchaseEmail() throws InterruptedException {
+    @Test
+    public void E_verifyPurchaseEmail() throws InterruptedException {
         if (!caseIDs.contains("41159")) throw new SkipException("Skipping this testCase: 41159");
             setCaseID(41159);
             setCaseComment("Verifying Purchase confirmation email arrived");
@@ -253,9 +255,9 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 */
     }
 
-    @Test (priority = 4, description = "Verify activation email arrived successfully and uses activation link")
-    public void ActivateLicense()  throws InterruptedException {
-        if (!caseIDs.contains("41160")) throw new SkipException("Skipping this testCase: 39742");
+    @Test
+    public void D_ActivateLicense()  throws InterruptedException {
+        if (!caseIDs.contains("41160")) throw new SkipException("Skipping this testCase: 41160");
             setCaseID(41160);
             setCaseComment("Activating license using link from email");
 

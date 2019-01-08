@@ -14,9 +14,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
 
 import javax.mail.*;
 import java.io.*;
@@ -37,7 +35,7 @@ public class BaseMethods  {
     public static String caseComment = new String();
     public static String runID = System.getProperty("RunId");
     //public static String runID = "320";
-    public ArrayList<String> caseIDs = new ArrayList<String>();
+    public static ArrayList<String> caseIDs = new ArrayList<String>();
     public String urlScreenshot;
 
     //Inicializacion del web driver
@@ -58,7 +56,8 @@ public class BaseMethods  {
 
 
 
-    @BeforeClass
+   //@BeforeClass
+    @BeforeSuite
     public static void initialization(){
 
        // String respath = "/usr/local/bin/chromedriver";
@@ -103,8 +102,9 @@ public class BaseMethods  {
         //driver.get("https://www.stg.openenglish.com/");
     }
 
-    @BeforeClass
-    public void getTestCases() throws IOException, APIException {
+    //@BeforeClass
+    @BeforeSuite
+    public static void getTestCases() throws IOException, APIException {
 
         APIClient client = new APIClient("https://openeducation.testrail.net/");
         client.setUser("agustin.barcia@openenglish.com");
@@ -579,7 +579,8 @@ public class BaseMethods  {
     }
 */
 
-    @AfterClass
+    //@AfterClass
+    @AfterSuite
     public void tearDownDriver() {
         if (driver != null) {
             driver.quit();
