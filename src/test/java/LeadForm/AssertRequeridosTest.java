@@ -23,6 +23,8 @@ public class AssertRequeridosTest extends BaseMethods {
         String caseID = "39729";
         if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
         setCaseID(39729);
         setCaseComment("Verificando que el titulo del leadform sea correcto");
         driver.get("https://www.stg.openenglish.com/");
@@ -51,6 +53,8 @@ public class AssertRequeridosTest extends BaseMethods {
         String caseID = "39731";
         if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
         setCaseID(39731);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible!!!!");
        driver.get("https://www.stg.openenglish.com/");
@@ -64,6 +68,8 @@ public class AssertRequeridosTest extends BaseMethods {
         String caseID = "39732";
         if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
         setCaseID(39732);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
         driver.get("https://www.stg.openenglish.com/");
@@ -76,6 +82,8 @@ public class AssertRequeridosTest extends BaseMethods {
         String caseID = "39733";
         if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
         setCaseID(39733);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
         driver.get("https://www.stg.openenglish.com/");
@@ -89,6 +97,8 @@ public class AssertRequeridosTest extends BaseMethods {
         String caseID = "39734";
         if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
         setCaseID(39734);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
 
@@ -103,6 +113,8 @@ public class AssertRequeridosTest extends BaseMethods {
         String caseID = "39730";
         if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
         setCaseID(39730);
         setCaseComment("Verifying all Required messages are shown");
 

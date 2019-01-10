@@ -7,6 +7,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.*;
@@ -33,10 +37,14 @@ public class BaseMethods  {
     public static String ckName = new String();
     public static String ckValue = new String();
     public static String caseComment = new String();
-    public static String runID = System.getProperty("RunId");
-    //public static String runID = "320";
+    //public static String runID = System.getProperty("RunId");
+    public static String runID = "320";
     public static ArrayList<String> caseIDs = new ArrayList<String>();
     public String urlScreenshot;
+    public static String className;
+    public static String testName;
+
+    public static String projectName;
 
     //Inicializacion del web driver
 
@@ -137,6 +145,13 @@ public class BaseMethods  {
     public static void setCaseComment(String comentario){
         caseComment = comentario;
         }
+
+    public static void setTestName(String tName){
+        testName = tName;
+    }
+    public static void setClassName(String cName){
+        className = cName;
+    }
     public static void setLangCookieName(String name){ckName = name;}
     public static void setLangCookieValue(String value){ckValue = value;}
 
@@ -210,6 +225,7 @@ public class BaseMethods  {
             System.out.println("Exception while taking screenshot "+e.getMessage());
         }
 
+        // Información del test fallido a Test Rail
         APIClient client = new APIClient("https://openeducation.testrail.net/");
         client.setUser("agustin.barcia@openenglish.com");
         client.setPassword("0232049021Ajb!");
@@ -224,9 +240,79 @@ public class BaseMethods  {
         data.put("comment", "Error en:" + ' ' + sStackTrace+"        " +
                 "Screenshot: "+urlScreenshot);
         JSONObject r = (JSONObject) client.sendPost("add_result_for_case/"+runID+"/"+caseID, data);
+        sendSlackMessage();
         System.out.println("Case ID: "+caseID+" FAILED");
 
     }
+
+    public void sendSlackMessage () throws IOException {
+        //JSONObject json = new JSONObject();
+        //json.put("someKey", "someValue");
+
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+
+        try {
+            HttpPost request = new HttpPost("https://hooks.slack.com/services/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");
+            StringEntity params = new StringEntity(
+                    "{\n" +
+                            "    \"attachments\": [\n" +
+                            "        {\n" +
+                            "            \"fallback\": \"Failed test case during automation run\",\n" +
+                            "            \"title\": \"Failed test case during automation run\",\n" +
+                            "            \"image_url\": \""+urlScreenshot+"\",\n" +
+                            "            \"color\": \"#FF0000\",\n" +
+                            "          \t\"fields\": [\n" +
+                            "                {\n" +
+                            "                    \"title\": \"Project\",\n" +
+                            "                    \"value\": \"OE Adult\",\n" +
+                            "                    \"short\": true\n" +
+                            "                },\n" +
+                            "                {\n" +
+                            "                    \"title\": \"Environment\",\n" +
+                            "                    \"value\": \"Production\",\n" +
+                            "                    \"short\": true\n" +
+                            "                },\n" +
+                            "              \t{\n" +
+                            "                    \"title\": \"TestClass\",\n" +
+                            "                    \"value\": \""+className+"\",\n" +
+                            //"                    \"value\": \"CLASSNAME\",\n" +
+                            "                    \"short\": true\n" +
+                            "                },\n" +
+                            "              \t{\n" +
+                            "                    \"title\": \"Test\",\n" +
+                            "                    \"value\": \""+testName+"\",\n" +
+                            "                    \"short\": true\n" +
+                            "                }\n" +
+
+                            "            ],\n" +
+                            "          \"actions\": [\n" +
+                            "        {\n" +
+                            "          \"type\": \"button\",\n" +
+                            "          \"text\": \"See it in TestRail\",\n" +
+                            "          \"url\": \"https://openeducation.testrail.net/index.php?/runs/view/"+runID+"\"\n" +
+                            "        },\n" +
+                            "            {\n" +
+                            "          \"type\": \"button\",\n" +
+                            "          \"text\": \"See it in Jenkins\",\n" +
+                            "          \"url\": \"http://jenkins.dev.openenglish.com/job/LPAutomation/\"\n" +
+                            "        }\n" +
+                            "      ]\n" +
+                            "        }\n" +
+                            "    ]\n" +
+                            "}"
+            );
+            request.addHeader("content-type", "application/json");
+            request.setEntity(params);
+            httpClient.execute(request);
+// handle response here...
+        } catch (Exception ex) {
+            // handle exception here
+        } finally {
+            httpClient.close();
+        }
+
+    }
+
 
     public static boolean verifyMailSubject(String userName, String password, String message) {
         Folder folder = null;

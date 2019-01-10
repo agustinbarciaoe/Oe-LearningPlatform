@@ -20,6 +20,8 @@ public class LearningPlatformLoginTest extends BaseMethods {
         String caseID = "41201";
         if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
         setCaseID(41201);
         setCaseComment("Testing cookie values");
         setLangCookieName("NLS");
@@ -45,6 +47,8 @@ public class LearningPlatformLoginTest extends BaseMethods {
         String caseID = "41202";
         if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
 
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
         setCaseID(41202);
         setCaseComment("Testing cookie values");
         setLangCookieName("NLS");

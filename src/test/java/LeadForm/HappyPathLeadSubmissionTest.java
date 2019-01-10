@@ -24,19 +24,28 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
     public String emailRandom;
     public static String nameRandom = "NAME" + randomEmail();
+
     //  WebDriverWait wait = new WebDriverWait(driver, 15);
+
+
+
 
     @Test
     public void A_leadSubmission() throws InterruptedException {
 
+
+
         if (!caseIDs.contains("39742")) throw new SkipException("Skipping this testCase: 39742");
+
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
 
             WebDriverWait wait = new WebDriverWait(driver, 30);
 
             setCaseID(39742);
             setCaseComment("Happy path lead submission");
 
-            driver.get("https://www.stg.openenglish.com");
+            driver.get("https://www.stg.openenglish.com.rrpp");
            /*
             if (driver.findElement(By.id("cn-accept-cookie")).isDisplayed())
                 try {
@@ -88,6 +97,9 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     @Test
     public void B_openSalesTool() throws InterruptedException {
         if (!caseIDs.contains("41158")) throw new SkipException("Skipping this testCase: 41158");
+
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
             setCaseID(41158);
             setCaseComment("Loggin in to SF and confirm license purchase");
             WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -205,6 +217,9 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     public void C_verifyRegistrationEmail() throws InterruptedException {
 
         if (!caseIDs.contains("39743")) throw new SkipException("Skipping this testCase: 39743");
+
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
             setCaseID(39743);
             setCaseComment("Verifying Thank You email arrived");
 
@@ -225,6 +240,9 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     @Test
     public void E_verifyPurchaseEmail() throws InterruptedException {
         if (!caseIDs.contains("41159")) throw new SkipException("Skipping this testCase: 41159");
+
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
             setCaseID(41159);
             setCaseComment("Verifying Purchase confirmation email arrived");
             System.out.println(nameRandom);
@@ -258,6 +276,9 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     @Test
     public void D_ActivateLicense()  throws InterruptedException {
         if (!caseIDs.contains("41160")) throw new SkipException("Skipping this testCase: 41160");
+
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
             setCaseID(41160);
             setCaseComment("Activating license using link from email");
 
