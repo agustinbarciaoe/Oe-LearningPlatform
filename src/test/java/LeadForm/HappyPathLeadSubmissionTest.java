@@ -45,7 +45,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             setCaseID(39742);
             setCaseComment("Happy path lead submission");
 
-            driver.get("https://www.stg.openenglish.com.rrpp");
+            driver.get("https://www.stg.openenglish.com");
            /*
             if (driver.findElement(By.id("cn-accept-cookie")).isDisplayed())
                 try {
