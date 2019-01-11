@@ -37,8 +37,8 @@ public class BaseMethods  {
     public static String ckName = new String();
     public static String ckValue = new String();
     public static String caseComment = new String();
-    public static String runID = System.getProperty("RunId");
-    //public static String runID = "320";
+    //public static String runID = System.getProperty("RunId");
+    public static String runID = "320";
     public static ArrayList<String> caseIDs = new ArrayList<String>();
     public String urlScreenshot;
     public static String className;
@@ -257,8 +257,8 @@ public class BaseMethods  {
                     "{\n" +
                             "    \"attachments\": [\n" +
                             "        {\n" +
-                            "            \"fallback\": \"Failed test case during automation run ID:\""+runID+",\n" +
-                            "            \"title\": \"Failed test case during automation run\",\n" +
+                            "            \"fallback\": \"Failed test case during automation run\",\n" +
+                            "            \"title\": \"Failed test case during Test Run "+runID+"\",\n" +
                             "            \"image_url\": \""+urlScreenshot+"\",\n" +
                             "            \"color\": \"#FF0000\",\n" +
                             "          \t\"fields\": [\n" +

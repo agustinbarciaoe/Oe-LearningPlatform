@@ -27,7 +27,7 @@ public class AssertRequeridosTest extends BaseMethods {
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
         setCaseID(39729);
         setCaseComment("Verificando que el titulo del leadform sea correcto");
-        driver.get("https://www.stg.openenglish.com/");
+        driver.get("https://www.stg.openenglish.com.rpg/");
         assertEquals(driver.findElement(By.id("leadform-title")).getText(), "Empieza a Aprender Inglés");
 
     }
