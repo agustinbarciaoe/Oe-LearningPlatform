@@ -257,7 +257,7 @@ public class BaseMethods  {
                     "{\n" +
                             "    \"attachments\": [\n" +
                             "        {\n" +
-                            "            \"fallback\": \"Failed test case during automation run\",\n" +
+                            "            \"fallback\": \"Failed test case during automation run ID:\""+runID+",\n" +
                             "            \"title\": \"Failed test case during automation run\",\n" +
                             "            \"image_url\": \""+urlScreenshot+"\",\n" +
                             "            \"color\": \"#FF0000\",\n" +
