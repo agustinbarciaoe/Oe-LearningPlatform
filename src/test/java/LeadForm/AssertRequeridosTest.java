@@ -25,6 +25,7 @@ public class AssertRequeridosTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
         setCaseID(39729);
         setCaseComment("Verificando que el titulo del leadform sea correcto");
         driver.get("https://www.stg.openenglish.com.rpg/");
@@ -55,6 +56,7 @@ public class AssertRequeridosTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
         setCaseID(39731);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible!!!!");
        driver.get("https://www.stg.openenglish.com/");
@@ -70,6 +72,7 @@ public class AssertRequeridosTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
         setCaseID(39732);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
         driver.get("https://www.stg.openenglish.com/");
@@ -84,6 +87,7 @@ public class AssertRequeridosTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
         setCaseID(39733);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
         driver.get("https://www.stg.openenglish.com/");
@@ -99,6 +103,7 @@ public class AssertRequeridosTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
         setCaseID(39734);
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
 
@@ -115,6 +120,7 @@ public class AssertRequeridosTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
         setCaseID(39730);
         setCaseComment("Verifying all Required messages are shown");
 
