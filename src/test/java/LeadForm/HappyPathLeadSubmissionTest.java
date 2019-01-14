@@ -127,6 +127,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             driver.findElement(By.id("phSearchInput")).sendKeys(Keys.RETURN);
             while (isElementPresent(By.cssSelector(".messageText"))) {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("secondSearchText")));
+                driver.findElement(By.id("secondSearchText")).clear();
                 driver.findElement(By.id("secondSearchText")).sendKeys(nameRandom);
 //            driver.findElement(By.id("secondSearchButton")).click();
                 driver.findElement(By.id("secondSearchText")).sendKeys(Keys.RETURN);
@@ -148,7 +149,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             driver.findElement(By.className("dataCell")).click();
             driver.findElement(By.name("sales_tool")).click();
             driver.findElement(By.id("btnSelecta0D0t000001mxWbEAI")).click(); //SELECT DISCOUNT
-            driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id228:0:j_id245:0:cmdProcess")).click(); // ADD
+            driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id231:0:j_id248:0:cmdProcess")).click(); // ADD
 //        driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id338")).click(); // CHECKBOX "Assign a license to the buyer"
             if (!driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id352")).isSelected())
                 driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id352")).click();

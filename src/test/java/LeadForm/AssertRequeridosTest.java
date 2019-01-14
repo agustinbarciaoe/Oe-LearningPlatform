@@ -108,6 +108,8 @@ public class AssertRequeridosTest extends BaseMethods {
         setCaseComment("Verificando que el place holder para para el caso exista y sea visible");
 
         driver.get("https://www.stg.openenglish.com/");
+        Select countryDropdown = new Select(driver.findElement(By.id("country-select")));
+        countryDropdown.selectByValue("ar");
         Select regionDropdown= new Select(driver.findElement(By.id("state-select")));
         assertTrue(regionDropdown.getFirstSelectedOption().getText().contains("Región"));
 
