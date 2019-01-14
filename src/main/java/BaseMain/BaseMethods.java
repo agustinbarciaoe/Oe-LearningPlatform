@@ -294,7 +294,7 @@ public class BaseMethods  {
                             "            {\n" +
                             "          \"type\": \"button\",\n" +
                             "          \"text\": \"See it in Jenkins\",\n" +
-                            "          \"url\": \"http://jenkins.dev.openenglish.com/job/LPAutomation/\"\n" +
+                            "          \"url\": \"http://jenkins.openenglish.com/job/Automation-OE-Adult-NEW/\"\n" +
                             "        }\n" +
                             "      ]\n" +
                             "        }\n" +
