@@ -22,6 +22,7 @@ public class LearningPlatformLoginTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
         setCaseID(41201);
         setCaseComment("Testing cookie values");
         setLangCookieName("NLS");
@@ -49,6 +50,7 @@ public class LearningPlatformLoginTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
         setCaseID(41202);
         setCaseComment("Testing cookie values");
         setLangCookieName("NLS");

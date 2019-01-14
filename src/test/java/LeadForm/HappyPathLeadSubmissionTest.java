@@ -39,6 +39,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
 
             WebDriverWait wait = new WebDriverWait(driver, 30);
 
@@ -100,6 +101,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
             setCaseID(41158);
             setCaseComment("Loggin in to SF and confirm license purchase");
             WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -220,6 +222,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
             setCaseID(39743);
             setCaseComment("Verifying Thank You email arrived");
 
@@ -243,6 +246,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
             setCaseID(41159);
             setCaseComment("Verifying Purchase confirmation email arrived");
             System.out.println(nameRandom);
@@ -279,6 +283,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
             setCaseID(41160);
             setCaseComment("Activating license using link from email");
 
