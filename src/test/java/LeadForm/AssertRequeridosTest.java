@@ -127,6 +127,8 @@ public class AssertRequeridosTest extends BaseMethods {
         setCaseComment("Verifying all Required messages are shown");
 
         driver.get("https://www.stg.openenglish.com/");
+        Select countryDropdown = new Select(driver.findElement(By.id("country-select")));
+        countryDropdown.selectByValue("ar");
         driver.findElement(By.id("submit-button")).click();
         assertTrue(
                 driver.findElement(By.xpath("//*[@id=\"leadForm\"]/div[1]/div[2]/div/span")).isDisplayed()&&

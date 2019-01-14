@@ -151,9 +151,9 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             driver.findElement(By.id("btnSelecta0D0t000001mxWbEAI")).click(); //SELECT DISCOUNT
             driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id231:0:j_id248:0:cmdProcess")).click(); // ADD
 //        driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id338")).click(); // CHECKBOX "Assign a license to the buyer"
-            if (!driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id352")).isSelected())
-                driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id352")).click();
-            driver.findElement(By.id("j_id0:stco:j_id217:mainForm:cmdProcess")).click(); // CONFIRM
+            if (!driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id355")).isSelected())
+                driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id355")).click();
+            driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id372")).click(); // CONFIRM
 
             driver.switchTo().frame(driver.findElement(By.id("immediateCapture_iframe")));
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("numberInput")));
