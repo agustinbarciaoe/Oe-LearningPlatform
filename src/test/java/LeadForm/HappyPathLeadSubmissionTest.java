@@ -2,6 +2,9 @@ package LeadForm;
 
 import BaseMain.BaseMethods;
 import BaseMain.CustomTestListener;
+
+import Pages.OE_LeadForm;
+import Pages.OE_ThankYou;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -22,13 +25,26 @@ import static org.testng.Assert.assertTrue;
 @Listeners(CustomTestListener.class)
 public class HappyPathLeadSubmissionTest extends BaseMethods {
 
-    public String emailRandom;
+    //public String emailRandom;
     public static String nameRandom = "NAME" + randomEmail();
+    public static String emailRandom = "tester.openenglish+" + nameRandom + "@gmail.com";
+    OE_LeadForm objOE_LeadForm;
+    OE_ThankYou objOE_ThankYou;
 
     //  WebDriverWait wait = new WebDriverWait(driver, 15);
 
 
+    @Test
+    public void leadSubmission() {
+        driver.get("https://www.stg.openenglish.com");
+        objOE_LeadForm = new OE_LeadForm(driver);
 
+        objOE_LeadForm.submitLeadForm(nameRandom, "TestName", emailRandom,"ar", "178", "245", "2222", "2222", "4");
+        objOE_ThankYou = new OE_ThankYou(driver);
+        assertTrue(driver.findElement(By.id("thankyou-hero-title")).getText().contains("Gracias por dar el primer paso para lograr tu objetivo"));
+
+
+    }
 
     @Test
     public void A_leadSubmission() throws InterruptedException {
@@ -61,7 +77,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             driver.findElement(By.id("firstname-input")).sendKeys(nameRandom);
             driver.findElement(By.id("lastname-input")).sendKeys("TestName");
             driver.findElement(By.id("emailaddress-input")).clear();
-            emailRandom = "tester.openenglish+" + nameRandom + "@gmail.com";
+
             //driver.findElement(By.id("emailaddress-input")).sendKeys("agustin.barcia+" + randomEmail() + "@openenglish.com");
             driver.findElement(By.id("emailaddress-input")).sendKeys(emailRandom);
             //driver.findElement(By.id("country-select"));
