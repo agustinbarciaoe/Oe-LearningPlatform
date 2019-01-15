@@ -15,6 +15,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.ITestResult;
@@ -99,9 +100,11 @@ public class BaseMethods  {
         //options.setBinary("/usr/local/bin/chromedriver");
 */
          //driver = new ChromeDriver(chromeDriverService,options);
-        WebDriverManager.firefoxdriver().setup();
+        //WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.chromedriver().setup();
 
-        driver = new FirefoxDriver();
+        //driver = new FirefoxDriver();
+        driver= new ChromeDriver();
 
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 

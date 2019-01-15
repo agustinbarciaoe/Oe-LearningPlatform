@@ -117,6 +117,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             //driver.findElement(By.name("go")).click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("phSearchInput")));
             driver.findElement(By.id("phSearchInput")).sendKeys(nameRandom);
+            //driver.findElement(By.id("phSearchInput")).sendKeys("NAMEEBIOSS");
             TimeUnit.SECONDS.sleep(5);
             try {
                 Thread.sleep(15000);
@@ -126,6 +127,11 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             //driver.findElement(By.id("phSearchInput")).click();
             driver.findElement(By.id("phSearchInput")).sendKeys(Keys.RETURN);
             while (isElementPresent(By.cssSelector(".messageText"))) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("secondSearchText")));
                 driver.findElement(By.id("secondSearchText")).clear();
                 driver.findElement(By.id("secondSearchText")).sendKeys(nameRandom);
@@ -148,11 +154,17 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             // driver.findElement(By.xpath("//*[@id=\"phSearchButton\"]")).click();
             driver.findElement(By.className("dataCell")).click();
             driver.findElement(By.name("sales_tool")).click();
-            driver.findElement(By.id("btnSelecta0D0t000001mxWbEAI")).click(); //SELECT DISCOUNT
-            driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id231:0:j_id248:0:cmdProcess")).click(); // ADD
+            driver.findElement(By.id("btnSelecta0D0t000000smvmEAA")).click(); //SELECT DISCOUNT
+        driver.findElement(By.id("j_id0:frmConditions:cmdOrgOEBlue")).sendKeys(Keys.PAGE_DOWN);
+        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id231:1:j_id248:0:cmdProcess")));
+       driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id231:1:j_id248:0:cmdProcess")).click(); // ADD
+
+            //driver.findElement(By.)
 //        driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id338")).click(); // CHECKBOX "Assign a license to the buyer"
             if (!driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id355")).isSelected())
+
                 driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id355")).click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id372")));
             driver.findElement(By.id("j_id0:stco:j_id217:mainForm:j_id372")).click(); // CONFIRM
 
             driver.switchTo().frame(driver.findElement(By.id("immediateCapture_iframe")));
@@ -201,7 +213,9 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             js.executeScript("arguments[0].click()", driver.findElement(By.id("submitBtn")));
             //driver.findElement(By.id("submitBtn")).click();
             Thread.sleep(10000);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".fa-check"))); // Checkbox OK
+        ((JavascriptExecutor) driver).executeScript("javascript:window.scrollBy(250, 350)");
+        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(By.cssSelector(".fa-check")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".fa-check"))); // Checkbox OK
             //wait.until(driver.findElement(By.cssSelector(".success-poll")).isDisplayed());
             //String bodyText = driver.findElement(By.tagName("body")).getText();
             // Assert.assertTrue("Text not found!", bodyText.contains(text));
@@ -209,7 +223,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             //assertTrue(driver.findElement(By.id("submitBtn")).getText().contains("SUBMIT PAYMENT"));
             //driver.findElement(By.name("j_id0:stco:j_id217:mainForm:j_id370")).click();
             driver.switchTo().defaultContent();
-            driver.findElement(By.name("j_id0:stco:j_id217:mainForm:j_id384")).click();
+            driver.findElement(By.name("j_id0:stco:j_id217:mainForm:j_id396")).click();// FINISH
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("zuora__sync_data_from_zbilling")));
             driver.findElement(By.name("zuora__sync_data_from_zbilling")).click();
 
