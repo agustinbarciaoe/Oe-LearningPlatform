@@ -3,8 +3,7 @@ package LeadForm;
 import BaseMain.BaseMethods;
 import BaseMain.CustomTestListener;
 
-import Pages.OE_LeadForm;
-import Pages.OE_ThankYou;
+import Pages.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -25,27 +24,35 @@ import static org.testng.Assert.assertTrue;
 @Listeners(CustomTestListener.class)
 public class HappyPathLeadSubmissionTest extends BaseMethods {
 
-    //public String emailRandom;
     public static String nameRandom = "NAME" + randomEmail();
     public static String emailRandom = "tester.openenglish+" + nameRandom + "@gmail.com";
-    OE_LeadForm objOE_LeadForm;
-    OE_ThankYou objOE_ThankYou;
+
 
     //  WebDriverWait wait = new WebDriverWait(driver, 15);
 
 
     @Test
-    public void leadSubmission() {
-        driver.get("https://www.stg.openenglish.com");
-        objOE_LeadForm = new OE_LeadForm(driver);
+    public void A_leadSubmission() {
+
+        if (!caseIDs.contains("39742")) throw new SkipException("Skipping this testCase: 39742");
+
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
+
+        setCaseID(39742);
+        setCaseComment("Happy path lead submission");
+
+        OE_LeadForm objOE_LeadForm = new OE_LeadForm(driver);
+        OE_ThankYou objOE_ThankYou = new OE_ThankYou(driver);
 
         objOE_LeadForm.submitLeadForm(nameRandom, "TestName", emailRandom,"ar", "178", "245", "2222", "2222", "4");
-        objOE_ThankYou = new OE_ThankYou(driver);
-        assertTrue(driver.findElement(By.id("thankyou-hero-title")).getText().contains("Gracias por dar el primer paso para lograr tu objetivo"));
+        assertTrue(objOE_ThankYou.getTitleBox().getText().contains("Gracias por dar el primer paso para lograr tu objetivo"));
 
 
     }
 
+    /*
     @Test
     public void A_leadSubmission() throws InterruptedException {
 
@@ -73,7 +80,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
                     }
                 }
             */
-
+/*
             driver.findElement(By.id("firstname-input")).sendKeys(nameRandom);
             driver.findElement(By.id("lastname-input")).sendKeys("TestName");
             driver.findElement(By.id("emailaddress-input")).clear();
@@ -110,7 +117,70 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             // verifyMail(emailRandom,"trinity110","cómo funciona");
 
     }
+    */
 
+    @Test
+    public void B_loginToSF(){
+        if (!caseIDs.contains("41218")) throw new SkipException("Skipping this testCase: 41218");
+
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
+        setCaseID(41218);
+        setCaseComment("Loggin in to SF");
+
+        SF_Login objSF_Login = new SF_Login(driver);
+        SF_Home objSF_Home = new SF_Home(driver);
+
+        objSF_Login.loginToSF("martin.tellechea@openenglish.com.stg", "trinity112");
+        System.out.println(objSF_Home.getProfileBox().getText());
+        assertTrue(objSF_Home.getProfileBox().getText().contains("Martin Tellechea"));
+  }
+
+  @Test
+  public void C_searchContact() throws InterruptedException {
+      if (!caseIDs.contains("41219")) throw new SkipException("Skipping this testCase: 41219");
+      setClassName(this.getClass().getSimpleName());
+      setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+      System.out.println("Begin Test class: "+className+", Test Method: "+testName);
+      setCaseID(41219);
+      setCaseComment("Search Contact");
+
+      SF_Home objSF_Home = new SF_Home(driver);
+      SF_ContactPage objSF_ContactPage = new SF_ContactPage(driver);
+
+      //nameRandom="NAMEGOLXCG";
+      objSF_Home.searchContact(nameRandom);
+      objSF_ContactPage.getContactHeader();
+      assertTrue(objSF_ContactPage.getContactHeader().isDisplayed());
+
+  }
+
+  @Test
+  public void D_purchaseSalesTool() throws InterruptedException {
+      if (!caseIDs.contains("41158")) throw new SkipException("Skipping this testCase: 41158");
+
+      setClassName(this.getClass().getSimpleName());
+      setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+      System.out.println("Begin Test class: "+className+", Test Method: "+testName);
+      setCaseID(41158);
+      setCaseComment("Purchase in SalesTool");
+
+      WebDriverWait wait = new WebDriverWait(driver, 60);
+
+      //nameRandom="NAMETPTFSI";
+      SF_ContactPage objSF_ContactPage = new SF_ContactPage(driver);
+      SF_Home objSF_Home = new SF_Home(driver);
+
+      objSF_Home.searchContact(nameRandom);
+
+      objSF_ContactPage.goToSalesTool();
+      objSF_ContactPage.makePurchase(nameRandom);
+
+
+  }
+
+/*
     @Test
     public void B_openSalesTool() throws InterruptedException {
         if (!caseIDs.contains("41158")) throw new SkipException("Skipping this testCase: 41158");
@@ -163,7 +233,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
             }
         }
         */
-
+/*
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dataCell")));
             //driver.findElement(By.id("phSearchButton")).click();
             //driver.findElement(By.id("phSearchButton")).click();
@@ -245,9 +315,10 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
 
 
     }
+*/
 
     @Test
-    public void C_verifyRegistrationEmail() throws InterruptedException {
+    public void E_verifyRegistrationEmail() throws InterruptedException {
 
         if (!caseIDs.contains("39743")) throw new SkipException("Skipping this testCase: 39743");
 
@@ -272,7 +343,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     }
 
     @Test
-    public void E_verifyPurchaseEmail() throws InterruptedException {
+    public void G_verifyPurchaseEmail() throws InterruptedException {
         if (!caseIDs.contains("41159")) throw new SkipException("Skipping this testCase: 41159");
 
         setClassName(this.getClass().getSimpleName());
@@ -309,7 +380,7 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
     }
 
     @Test
-    public void D_ActivateLicense()  throws InterruptedException {
+    public void F_ActivateLicense()  throws InterruptedException {
         if (!caseIDs.contains("41160")) throw new SkipException("Skipping this testCase: 41160");
 
         setClassName(this.getClass().getSimpleName());

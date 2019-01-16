@@ -487,7 +487,7 @@ public class BaseMethods  {
         return null;
     }
 
-    protected boolean isElementPresent(By by){
+    public static boolean isElementPresent(By by){
         try{
             driver.findElement(by);
             return true;

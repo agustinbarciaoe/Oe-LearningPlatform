@@ -87,6 +87,7 @@ public class OE_LeadForm {
         dropdown.selectByValue(strAgeRange);
     }
 
+    // Actions
     public void submitLeadForm (String strUserName,
                                 String strLastName,
                                 String strEmail,
@@ -96,6 +97,8 @@ public class OE_LeadForm {
                                 String strPrefix3,
                                 String strPrefix4,
                                 String strAgeRange) {
+        driver.get("https://www.stg.openenglish.com");
+
         this.setUserName(strUserName);
         this.setLastName(strLastName);
         this.setEmail(strEmail);
