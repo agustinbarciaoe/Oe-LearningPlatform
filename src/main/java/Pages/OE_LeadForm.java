@@ -28,7 +28,7 @@ public class OE_LeadForm {
     WebElement citySelect;
     @FindBy (xpath="//*[@id=\"phone-format-selector\"]/label[1]")
     WebElement mobile;
-    @FindBy (name="LINE")
+    @FindBy (name="//*[@id=\"phone-format-selector\"]/label[1]")
     WebElement line;
     @FindBy (xpath = "//*[@id=\"phone-inputs\"]/input[3]")
     WebElement prefix3;
@@ -36,6 +36,8 @@ public class OE_LeadForm {
     WebElement prefix4;
     @FindBy (xpath="//*[@id=\"isforme-radio\"]/label[1]")
     WebElement isForMe;
+    @FindBy (xpath="//*[@id=\"isforme-radio\"]/label[2]")
+    WebElement isForMySon;
     @FindBy (id="agerange-select")
     WebElement ageRange;
     @FindBy (id="submit-button")
@@ -96,7 +98,9 @@ public class OE_LeadForm {
                                 String strCity,
                                 String strPrefix3,
                                 String strPrefix4,
-                                String strAgeRange) {
+                                String strAgeRange,
+                                boolean isForMe,
+                                boolean isMobile) {
         driver.get("https://www.stg.openenglish.com");
 
         this.setUserName(strUserName);
@@ -105,8 +109,10 @@ public class OE_LeadForm {
         this.setCountrySelect(strCountry);
         this.setStateSelect(strState);
         this.setCitySelect(strCity);
-        this.mobile.click();
-        this.isForMe.click();
+        if (isMobile){
+        this.mobile.click();} else {this.line.click();}
+        if (isForMe) {
+        this.isForMe.click();} else {this.isForMySon.click();}
         this.setPrefix3(strPrefix3);
         this.setPrefix4(strPrefix4);
         this.setAgeRange(strAgeRange);

@@ -39,7 +39,7 @@ public class BaseMethods  {
     public static String ckValue = new String();
     public static String caseComment = new String();
     public static String runID = System.getProperty("RunId");
-    //public static String runID = "325";
+    //public static String runID = "336";
     public static ArrayList<String> caseIDs = new ArrayList<String>();
     public String urlScreenshot;
     public static String className;
@@ -124,6 +124,7 @@ public class BaseMethods  {
        emailRandom = "tester.openenglish+" + nameRandom + "@gmail.com";
 
     }
+
 
     //@BeforeClass
     @BeforeSuite

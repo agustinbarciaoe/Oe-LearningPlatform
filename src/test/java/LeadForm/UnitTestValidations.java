@@ -13,7 +13,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners(CustomTestListener.class)
-public class AssertRequeridosTest extends BaseMethods {
+public class UnitTestValidations extends BaseMethods {
 
 
 
