@@ -24,29 +24,69 @@ import static org.testng.Assert.assertTrue;
 @Listeners(CustomTestListener.class)
 public class HappyPathLeadSubmissionTest extends BaseMethods {
 
-    public static String nameRandom = "NAME" + randomEmail();
-    public static String emailRandom = "tester.openenglish+" + nameRandom + "@gmail.com";
+//    public static String nameRandom = "NAME" + randomEmail();
+ //   public static String emailRandom = "tester.openenglish+" + nameRandom + "@gmail.com";
 
 
     //  WebDriverWait wait = new WebDriverWait(driver, 15);
 
 
     @Test
-    public void A_leadSubmission() {
+    public void A_leadSubmission_C41225() {
 
-        if (!caseIDs.contains("39742")) throw new SkipException("Skipping this testCase: 39742");
+        if (!caseIDs.contains("41225")) throw new SkipException("Skipping this testCase: 41225");
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
-        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName+", UserName: "+nameRandom);
 
-        setCaseID(39742);
+        setCaseID(41225);
         setCaseComment("Happy path lead submission");
 
         OE_LeadForm objOE_LeadForm = new OE_LeadForm(driver);
         OE_ThankYou objOE_ThankYou = new OE_ThankYou(driver);
 
         objOE_LeadForm.submitLeadForm(nameRandom, "TestName", emailRandom,"ar", "178", "245", "2222", "2222", "4");
+        assertTrue(objOE_ThankYou.getTitleBox().getText().contains("Gracias por dar el primer paso para lograr tu objetivo"));
+
+
+    }
+
+    @Test
+    public void A_leadSubmission_C41226() {
+
+        if (!caseIDs.contains("41226")) throw new SkipException("Skipping this testCase: 41226");
+        setCaseID(41226);
+        setCaseComment("Happy path lead submission");
+
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName+", UserName: "+nameRandom);
+
+        OE_LeadForm objOE_LeadForm = new OE_LeadForm(driver);
+        OE_ThankYou objOE_ThankYou = new OE_ThankYou(driver);
+
+        objOE_LeadForm.submitLeadForm(nameRandom, "TestName", emailRandom,"ar", "178", "245", "2222", "2222", "5");
+        assertTrue(objOE_ThankYou.getTitleBox().getText().contains("Gracias por dar el primer paso para lograr tu objetivo"));
+
+
+    }
+
+    @Test
+    public void A_leadSubmission_C41227() {
+
+        if (!caseIDs.contains("41227")) throw new SkipException("Skipping this testCase: 41227");
+        setCaseID(41227);
+        setCaseComment("Happy path lead submission");
+
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName+", UserName: "+nameRandom);
+
+        OE_LeadForm objOE_LeadForm = new OE_LeadForm(driver);
+        OE_ThankYou objOE_ThankYou = new OE_ThankYou(driver);
+
+        objOE_LeadForm.submitLeadForm(nameRandom, "TestName", emailRandom,"ar", "178", "245", "2222", "2222", "5");
         assertTrue(objOE_ThankYou.getTitleBox().getText().contains("Gracias por dar el primer paso para lograr tu objetivo"));
 
 

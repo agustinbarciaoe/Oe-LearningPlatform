@@ -39,11 +39,13 @@ public class BaseMethods  {
     public static String ckValue = new String();
     public static String caseComment = new String();
     public static String runID = System.getProperty("RunId");
-    //public static String runID = "332";
+    //public static String runID = "325";
     public static ArrayList<String> caseIDs = new ArrayList<String>();
     public String urlScreenshot;
     public static String className;
     public static String testName;
+    public static String nameRandom;
+    public static String emailRandom;
 
     public static String projectName;
 
@@ -108,9 +110,19 @@ public class BaseMethods  {
 
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
-        System.out.println("El Run ID recibido es: "+runID);
+        System.out.println("Run ID: "+runID);
+
+
+
         //runID="307";
         //driver.get("https://www.stg.openenglish.com/");
+    }
+
+    @BeforeSuite
+    public void initializeNameEmail(){
+       nameRandom = "NAME" + randomEmail();
+       emailRandom = "tester.openenglish+" + nameRandom + "@gmail.com";
+
     }
 
     //@BeforeClass
