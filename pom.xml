@@ -16,8 +16,17 @@
                     <source>6</source>
                     <target>6</target>
                 </configuration>
+
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <runOrder>alphabetical</runOrder>
+                </configuration>
             </plugin>
         </plugins>
+
     </build>
 
     <dependencies>
