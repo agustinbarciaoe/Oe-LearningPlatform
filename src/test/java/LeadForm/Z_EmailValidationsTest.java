@@ -221,6 +221,11 @@ public class Z_EmailValidationsTest extends BaseMethods {
         //nameRandom = "NAMEOGCWXK";
 
         System.out.println(nameRandom);
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
 
         String assignationLink = getAssignationLink("tester.openenglish@gmail.com", "trinity110", nameRandom, "Asignación de licencia");
 
