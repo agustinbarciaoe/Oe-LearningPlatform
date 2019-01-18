@@ -202,29 +202,7 @@ public class Z_EmailValidationsTest extends BaseMethods {
 
         Boolean popUpBolivares = false;
 
-
-        /*
-        try {
-
-
-            wait.until(ExpectedConditions.visibilityOfElementLocated(((By.xpath("//*[@id=\"angular-body\"]/div[4]/div/div[1]/div/div[3]/div[3]"))))); // POPUP Bolivares
-
-               popUpBolivares = true;
-
-        }
-        catch (InterruptedException ex) {
-            popUpBolivares=false;}
-
-*/
-
-
         Assert.assertTrue(driver.findElement(By.id("level-progress")).isDisplayed());
-
-
-        //assertTrue((verifyMailContent("tester.openenglish@gmail.com", "trinity110", "Hello " + nameRandom, "We are writing to confirm the purchase of your course")));
-        //assertTrue((verifyMailContent("pepe@mailsac.com", null , "Hello " + nameRandom, "We are writing to confirm the purchase of your course")));
-
-
 
     }
 

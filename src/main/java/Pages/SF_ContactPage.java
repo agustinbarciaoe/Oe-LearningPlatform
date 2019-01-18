@@ -61,7 +61,7 @@ public class SF_ContactPage {
         this.btnSalesTool.click();
    }
 
-   public void makePurchase(String nameRandom) throws InterruptedException {
+   public void makePurchase(String nameRandom, Boolean forMe) throws InterruptedException {
        WebDriverWait wait = new WebDriverWait(driver, 60);
 
 
@@ -71,8 +71,13 @@ public class SF_ContactPage {
         driver.findElement(By.id("j_id0:frmConditions:cmdOrgOEBlue")).sendKeys(Keys.PAGE_DOWN);
         this.btnAdd.click(); // ADD
 
-       if (!this.chkAssignToBuyer.isSelected()) // CHECKBOX "Assign a license to the buyer"
-           this.chkAssignToBuyer.click();
+       if (forMe){
+           if (!this.chkAssignToBuyer.isSelected()) // CHECKBOX "Assign a license to the buyer" is not Checked
+               this.chkAssignToBuyer.click();}
+       else {
+           if (this.chkAssignToBuyer.isSelected()) // CHECKBOX "Assign a license to the buyer" is Checked
+               this.chkAssignToBuyer.click();}
+
 
        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", this.btnConfirm);
        this.btnConfirm.click();// CONFIRM

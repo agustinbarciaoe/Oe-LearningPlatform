@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 import static org.testng.Assert.assertTrue;
 
 @Listeners(CustomTestListener.class)
-public class HappyPathLeadSubmissionTest extends BaseMethods {
+public class SalesforceTest extends BaseMethods {
 
 
     @Test
@@ -56,27 +56,50 @@ public class HappyPathLeadSubmissionTest extends BaseMethods {
   }
 
   @Test
-  public void D_purchaseSalesTool_C41158() throws InterruptedException {
-      if (!caseIDs.contains("41158")) throw new SkipException("Skipping this testCase: 41158");
+    public void D_purchaseSalesTool_C41158() throws InterruptedException {
+        if (!caseIDs.contains("41158")) throw new SkipException("Skipping this testCase: 41158");
 
-      setClassName(this.getClass().getSimpleName());
-      setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
-      System.out.println("Begin Test class: "+className+", Test Method: "+testName);
-      setCaseID(41158);
-      setCaseComment("Purchase in SalesTool");
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
+        setCaseID(41158);
+        setCaseComment("Purchase in SalesTool");
 
-      WebDriverWait wait = new WebDriverWait(driver, 60);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
 
-      //nameRandom="NAMETPTFSI";
-      SF_ContactPage objSF_ContactPage = new SF_ContactPage(driver);
-      SF_Home objSF_Home = new SF_Home(driver);
+        //nameRandom="NAMETPTFSI";
+        SF_ContactPage objSF_ContactPage = new SF_ContactPage(driver);
+        SF_Home objSF_Home = new SF_Home(driver);
 
-      objSF_Home.searchContact(nameRandom);
+        objSF_Home.searchContact(nameRandom);
 
-      objSF_ContactPage.goToSalesTool();
-      objSF_ContactPage.makePurchase(nameRandom);
+        objSF_ContactPage.goToSalesTool();
+        objSF_ContactPage.makePurchase(nameRandom, true);
 
-  }
+    }
+
+    @Test
+    public void D_purchaseSalesTool_C41258() throws InterruptedException {
+        if (!caseIDs.contains("41258")) throw new SkipException("Skipping this testCase: 41258");
+        setCaseID(41258);
+        setCaseComment("Purchase in SalesTool");
+
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
+
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+
+        //nameRandom="NAMETPTFSI";
+        SF_ContactPage objSF_ContactPage = new SF_ContactPage(driver);
+        SF_Home objSF_Home = new SF_Home(driver);
+
+        objSF_Home.searchContact(nameRandom);
+
+        objSF_ContactPage.goToSalesTool();
+        objSF_ContactPage.makePurchase(nameRandom, false);
+
+    }
 
 }
 
