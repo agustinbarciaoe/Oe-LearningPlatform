@@ -1,6 +1,7 @@
 package LeadForm;
 
 import BaseMain.BaseMethods;
+import Pages.SF_PortalAssignLicense;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -206,5 +207,34 @@ public class Z_EmailValidationsTest extends BaseMethods {
 
     }
 
+    @Test
+    public void F_AssignLicenseFromAssignationEmail_C41231()  throws InterruptedException {
+        if (!caseIDs.contains("41231")) throw new SkipException("Skipping this testCase: 41231");
+        setCaseID(41231);
+        setCaseComment("Assigning license using link from email");
+        setClassName(this.getClass().getSimpleName());
+        setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
+        System.out.println("Begin Test class: "+className+", Test Method: "+testName);
+        setCaseID(41231);
+        setCaseComment("Assigning license using link from email");
 
+        //nameRandom = "NAMEOGCWXK";
+
+        System.out.println(nameRandom);
+
+        String assignationLink = getAssignationLink("tester.openenglish@gmail.com", "trinity110", nameRandom, "Asignación de licencia");
+
+        System.out.println("Link de asignacion: " + assignationLink);
+
+        driver.get(assignationLink);
+
+        SF_PortalAssignLicense objSF_PortalAssignLicense = new SF_PortalAssignLicense(driver);
+        objSF_PortalAssignLicense.assignNewStudent(nameRandom+"-STUDENT","AssignedLastname","tester.openenglish+" + nameRandom + "STUDENT@gmail.com");
+
+        System.out.println(emailRandom);
+
+        Assert.assertTrue(objSF_PortalAssignLicense.getTxtAssignedTo().getText().contains(nameRandom+"-STUDENT"));
+        //Assert.assertTrue(driver.findElement(By.id("level-progress")).isDisplayed());
+
+    }
 }
