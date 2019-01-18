@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 import static org.testng.Assert.assertTrue;
 
 @Listeners(CustomTestListener.class)
-public class SalesforceTest extends BaseMethods {
+public class B_SalesforceTest extends BaseMethods {
 
 
     @Test
