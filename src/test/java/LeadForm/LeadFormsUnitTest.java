@@ -13,7 +13,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners(CustomTestListener.class)
-public class UnitTestValidations extends BaseMethods {
+public class LeadFormsUnitTest extends BaseMethods {
 
 
 
@@ -22,6 +22,7 @@ public class UnitTestValidations extends BaseMethods {
     public void leadformtitle() throws InterruptedException{
         String caseID = "39729";
         if (!caseIDs.contains(caseID)) throw new SkipException("Skipping this testCase: "+caseID);
+
 
         setClassName(this.getClass().getSimpleName());
         setTestName(Thread.currentThread().getStackTrace()[1].getMethodName());
