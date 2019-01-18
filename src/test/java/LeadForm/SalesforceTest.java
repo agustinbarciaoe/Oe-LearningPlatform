@@ -100,6 +100,5 @@ public class SalesforceTest extends BaseMethods {
         objSF_ContactPage.makePurchase(nameRandom, false);
 
     }
-
 }
 
