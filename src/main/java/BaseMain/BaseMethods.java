@@ -50,6 +50,7 @@ public class BaseMethods  {
 
     public static String projectName;
 
+
     //Inicializacion del web driver
 
     //public static EmailUtils emailUtils;
