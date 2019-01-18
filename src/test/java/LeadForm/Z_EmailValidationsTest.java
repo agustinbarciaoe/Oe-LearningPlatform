@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
-public class EmailValidations extends BaseMethods {
+public class Z_EmailValidationsTest extends BaseMethods {
 
     @Test
     public void E_verifyThankYouEmail_C39743() throws InterruptedException {
