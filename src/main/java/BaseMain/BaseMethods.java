@@ -38,8 +38,8 @@ public class BaseMethods  {
     public static String ckName = new String();
     public static String ckValue = new String();
     public static String caseComment = new String();
-    public static String runID = System.getProperty("RunId");
-    //public static String runID = "336";
+    //public static String runID = System.getProperty("RunId");
+    public static String runID = "336";
     public static ArrayList<String> caseIDs = new ArrayList<String>();
     public String urlScreenshot;
     public static String className;
@@ -71,38 +71,7 @@ public class BaseMethods  {
     @BeforeSuite
     public static void initialization(){
 
-       // String respath = "/usr/local/bin/chromedriver";
-       // System.setProperty("webdriver.chrome.driver", respath); // "C:\\Users\\Agustin Barcia\\IdeaProjects\\oemaven\\src\\main\\resources\\chromedriver.exe");
 
-        //WebDriverManager.chromedriver().setup();
-
-
-
-/*
-        ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
-        builder.withVerbose(false);
-        builder.withEnvironment(ImmutableMap.of("DISPLAY", ":1"));
-      / ChromeDriverService chromeDriverService = builder.build();
-
-
-        ChromeOptions options = new ChromeOptions();
-
-        options.addArguments("--headless");
-
-        options.addArguments("–no-sandbox");
-        options.addArguments("–disable-dev-shm-usage");
-        options.setExperimentalOption("useAutomationExtension", false);
-
-        options.addArguments("start-maximized"); // open Browser in maximized mode
-        options.addArguments("disable-infobars"); // disabling infobars
-        options.addArguments("--disable-extensions"); // disabling extensions
-        options.addArguments("--disable-gpu"); // applicable to windows os only
-
-
-        //options.setBinary("/usr/local/bin/chromedriver");
-*/
-         //driver = new ChromeDriver(chromeDriverService,options);
-        //WebDriverManager.firefoxdriver().setup();
         WebDriverManager.chromedriver().setup();
 
         //driver = new FirefoxDriver();
@@ -113,9 +82,6 @@ public class BaseMethods  {
         System.out.println("Run ID: "+runID);
 
 
-
-        //runID="307";
-        //driver.get("https://www.stg.openenglish.com/");
     }
 
     @BeforeSuite
@@ -264,6 +230,7 @@ public class BaseMethods  {
     public void sendSlackMessage () throws IOException {
         //JSONObject json = new JSONObject();
         //json.put("someKey", "someValue");
+
 
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
